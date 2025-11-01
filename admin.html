@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowlzastro Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f1419;
+            color: #e2e8f0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #131827;
+            border-right: 1px solid rgba(107, 70, 193, 0.3);
+            padding: 2rem 0;
+        }
+        .logo {
+            padding: 0 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        .nav-item {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #94a3b8;
+            transition: all 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(107, 70, 193, 0.1);
+            color: #e2e8f0;
+            border-left: 3px solid #d4af37;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .top-bar {
+            background: rgba(19, 24, 39, 0.95);
+            border-bottom: 1px solid rgba(107, 70, 193, 0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-box {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #e2e8f0;
+            outline: none;
+            width: 300px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .role-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .role-owner {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .role-admin {
+            background: rgba(107, 70, 193, 0.2);
+            color: #8b5cf6;
+            border: 1px solid rgba(107, 70, 193, 0.4);
+        }
+        .content-area {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(19, 24, 39, 0.8) 0%, rgba(26, 31, 53, 0.8) 100%);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .stat-card h3 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+        }
+        .table-container {
+            background: rgba(19, 24, 39, 0.8);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th {
+            background: rgba(107, 70, 193, 0.1);
+            color: #d4af37;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+        }
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-right: 0.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+        .btn-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: rgba(19, 24, 39, 0.98);
+            border: 2px solid rgba(107, 70, 193, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(107, 70, 193, 0.5); border-radius: 4px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">🔮 Knowlzastro Admin</div>
+        <div class="nav-item active" onclick="showSection('users')">
+            <span>👥</span> Users Management
+        </div>
+        <div class="nav-item" onclick="showSection('admins')">
+            <span>🛡️</span> Admin Management
+        </div>
+        <div class="nav-item" onclick="showSection('audit')">
+            <span>📋</span> Audit Log
+        </div>
+        <div class="nav-item" onclick="showSection('settings')">
+            <span>⚙️</span> Settings
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <input type="text" class="search-box" placeholder="Search users...">
+            <div class="user-info">
+                <span class="role-badge role-owner">👑 Owner</span>
+                <span>neerajmun26@gmail.com</span>
+                <button class="action-btn btn-danger" onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- Users Section -->
+            <div id="users-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <div class="number" id="total-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Users</h3>
+                        <div class="number" id="active-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today's Revenue</h3>
+                        <div class="number" id="today-revenue">₹0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <div class="number" id="total-revenue">₹0</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <button class="action-btn btn-primary" onclick="inviteUser()">+ Invite User</button>
+                    <button class="action-btn btn-success" onclick="exportData()">📊 Export Data</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Last Active</th>
+                                <th>Revenue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table">
+                            <tr><td colspan="7" style="text-align: center; padding: 3rem;">No users yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="hidden">
+                <h2 style="margin-bottom: 2rem; color: #d4af37;">Settings</h2>
+                <div class="stat-card" style="margin-bottom: 1rem;">
+                    <h3>Ownership Protection</h3>
+                    <p style="color: #94a3b8; margin-top: 0.5rem;">The owner role (neerajmun26@gmail.com) cannot be transferred without explicit OTP verification.</p>
+                    <button class="action-btn btn-danger" style="margin-top: 1rem;" onclick="requestOwnershipTransfer()">Request Ownership Transfer</button>
+                </div>
+                <div class="stat-card" style="margin-bottom: 1rem;">
+                    <h3>Admin Permissions</h3>
+                    <div style="margin-top: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <input type="checkbox" id="can-add-free-users">
+                            <span>Can add free users</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" id="can-manage-admins">
+                            <span>Can manage admins</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite User Modal -->
+    <div id="invite-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #d4af37; margin-bottom: 1rem;">Invite User</h2>
+            <input type="email" id="invite-email" placeholder="Email address" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 8px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(107, 70, 193, 0.3); color: #e2e8f0; outline: none;">
+            <select id="invite-role" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 8px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(107, 70, 193, 0.3); color: #e2e8f0; outline: none;">
+                <option value="free">Free User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <div style="display: flex; gap: 1rem;">
+                <button class="action-btn btn-primary" style="flex: 1;" onclick="sendInvite()">Send Invite</button>
+                <button class="action-btn btn-danger" style="flex: 1;" onclick="closeModal('invite-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'users';
+        let usersData = [];
+        
+        const ownerEmail = 'neerajmun26@gmail.com';
+        
+        function showSection(section) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('[id$="-section"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById(section + '-section').classList.remove('hidden');
+            currentSection = section;
+        }
+        
+        function inviteUser() {
+            document.getElementById('invite-modal').classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function sendInvite() {
+            const email = document.getElementById('invite-email').value;
+            const role = document.getElementById('invite-role').value;
+            
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+            
+            // Add to users table
+            usersData.push({
+                email: email,
+                role: role,
+                status: 'Invited',
+                created: new Date().toLocaleDateString(),
+                lastActive: '-',
+                revenue: '₹0'
+            });
+            
+            updateUsersTable();
+            closeModal('invite-modal');
+            document.getElementById('invite-email').value = '';
+        }
+        
+        function updateUsersTable() {
+            const tbody = document.getElementById('users-table');
+            tbody.innerHTML = '';
+            
+            usersData.forEach((user, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${user.status}</td>
+                    <td>${user.created}</td>
+                    <td>${user.lastActive}</td>
+                    <td>${user.revenue}</td>
+                    <td>
+                        <button class="action-btn btn-primary" onclick="editUser(${idx})">Edit</button>
+                        <button class="action-btn btn-danger" onclick="removeUser(${idx})">Remove</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('total-users').textContent = usersData.length;
+        }
+        
+        function removeUser(idx) {
+            if (confirm('Are you sure you want to remove this user?')) {
+                usersData.splice(idx, 1);
+                updateUsersTable();
+            }
+        }
+        
+        function exportData() {
+            const data = {
+                users: usersData,
+                exportDate: new Date().toISOString(),
+                owner: ownerEmail
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `knowlzastro_users_${new Date().getTime()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowlzastro - World's Most Accurate Astrology AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Navigation */
+        nav {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.2);
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+        }
+        .nav-links a { color: #94a3b8; transition: color 0.2s; }
+        .nav-links a:hover { color: #e2e8f0; }
+        .chat-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .chat-btn:hover { transform: translateY(-2px); }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: radial-gradient(at 30% 50%, rgba(107, 70, 193, 0.15) 0px, transparent 50%);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
+
+        /* Features Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(107, 70, 193, 0.4);
+            box-shadow: 0 15px 40px rgba(107, 70, 193, 0.2);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #d4af37;
+        }
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Floating Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        .pandit-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #8b6914);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid #d4af37;
+            animation: pulse 2s infinite;
+        }
+        .pandit-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.6);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Chat Popup */
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 2rem;
+            width: 400px;
+            height: 600px;
+            background: rgba(19, 24, 39, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .chat-popup.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+        .chat-popup-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+        .chat-popup-header .pandit-avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            margin: 0;
+            cursor: default;
+        }
+        .chat-popup-header .pandit-avatar:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .chat-popup-header-info h3 {
+            color: #d4af37;
+            font-size: 1.1rem;
+        }
+        .chat-popup-header-info p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        .namaste-bubble {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: 3px solid rgba(59, 130, 246, 0.7);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.15);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+            max-width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .namaste-bubble::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-right: 3px solid rgba(59, 130, 246, 0.7);
+            border-bottom: 3px solid rgba(59, 130, 246, 0.7);
+            transform: rotate(45deg);
+            left: 30px;
+            bottom: -12px;
+        }
+        .chat-icon-top {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+        }
+        @keyframes glow {
+            from { 
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.15);
+            }
+            to { 
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.9), inset 0 0 25px rgba(255, 255, 255, 0.25);
+            }
+        }
+        .panda-chat-visual {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.05) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border-radius: 16px;
+        }
+        .panda-character {
+            font-size: 4rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .chat-bubble-visual {
+            flex: 1;
+        }
+        .download-btn {
+            background: rgba(107, 70, 193, 0.2);
+            border: 1px solid rgba(107, 70, 193, 0.4);
+            color: #d4af37;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+        .download-btn:hover {
+            background: rgba(107, 70, 193, 0.4);
+        }
+        
+        /* Payment Modal */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .payment-modal.active {
+            display: flex;
+        }
+        .payment-box {
+            background: linear-gradient(135deg, rgba(19, 24, 39, 0.98) 0%, rgba(10, 14, 26, 0.98) 100%);
+            border: 2px solid rgba(107, 70, 193, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .payment-box h2 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .payment-price {
+            font-size: 2rem;
+            color: #d4af37;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .payment-method {
+            background: rgba(107, 70, 193, 0.2);
+            border: 2px solid rgba(107, 70, 193, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .payment-method:hover {
+            background: rgba(107, 70, 193, 0.4);
+            border-color: rgba(107, 70, 193, 0.6);
+            transform: translateY(-2px);
+        }
+        .payment-method.selected {
+            background: rgba(107, 70, 193, 0.4);
+            border-color: #d4af37;
+        }
+        .pay-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .pay-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .api-key-btn-small {
+            background: rgba(107, 70, 193, 0.2);
+            border: 1px solid rgba(107, 70, 193, 0.4);
+            color: #94a3b8;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .api-key-btn-small:hover {
+            background: rgba(107, 70, 193, 0.4);
+            color: #e2e8f0;
+        }
+        .close-btn {
+            background: rgba(107, 70, 193, 0.2);
+            border: none;
+            color: #e2e8f0;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+        .close-btn:hover {
+            background: rgba(107, 70, 193, 0.4);
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } }
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .ai-message .message-avatar { background: rgba(212, 175, 55, 0.3); }
+        .user-message .message-avatar { background: rgba(139, 92, 246, 0.3); }
+        .message-content {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 12px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        .ai-message .message-content { background: rgba(30, 41, 59, 0.6); }
+        .user-message .message-content { background: rgba(139, 92, 246, 0.15); }
+        .message-content p { margin-bottom: 0.4rem; }
+        
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid rgba(107, 70, 193, 0.3);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input {
+            flex: 1;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 12px;
+            padding: 0.6rem 0.8rem;
+            color: #e2e8f0;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .chat-input:focus { border-color: rgba(107, 70, 193, 0.6); }
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .send-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(107, 70, 193, 0.5); border-radius: 4px; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            .nav-links { gap: 1rem; font-size: 0.85rem; }
+            .hero { padding: 3rem 1rem; min-height: 70vh; }
+            .section { padding: 3rem 1rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .chat-popup {
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 20px 20px 0 0;
+            }
+            .chat-widget {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🔮 Knowlzastro</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#mission">Mission</a>
+            <a href="#testimonials">Testimonials</a>
+        </div>
+        <button class="chat-btn" onclick="openChat()">Start Consultation</button>
+    </nav>
+
+    <!-- Floating Chat Widget -->
+    <div class="chat-widget">
+        <div class="pandit-avatar" onclick="toggleChat()" title="Chat with Pandit">🐼</div>
+    </div>
+
+    <!-- Chat Popup -->
+    <div id="chat-popup" class="chat-popup">
+        <div class="chat-popup-header">
+            <div class="pandit-avatar">🐼</div>
+            <div class="chat-popup-header-info">
+                <h3>Pandit AI</h3>
+                <p>Expert Astrologer</p>
+            </div>
+            <div class="header-actions">
+                <button class="close-btn" onclick="closeChat()">×</button>
+            </div>
+        </div>
+        
+        <div id="chat-messages" class="chat-messages">
+            <div class="panda-chat-visual">
+                <div class="panda-character">🐼</div>
+                <div class="chat-bubble-visual">
+                    <div class="namaste-bubble">
+                        <div class="chat-icon-top">💬</div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 800;">NAMASTE!</div>
+                        <div style="font-weight: 400; font-size: 1rem;">How may I help you?</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message ai-message">
+                <div class="message-avatar">🐼</div>
+                <div class="message-content">
+                    <p>Welcome! I'm your expert astrological consultant with 200 years of expertise.</p>
+                    <p>To provide accurate guidance, I need these 3 details:</p>
+                    <p>📅 <strong>1. Date of Birth</strong><br>
+                       ⏰ <strong>2. Time of Birth</strong><br>
+                       📍 <strong>3. Place of Birth</strong></p>
+                    <p>Please share these details to begin your consultation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div id="payment-modal" class="payment-modal">
+            <div class="payment-box">
+                <h2>💳 Proceed to Payment</h2>
+                <p style="text-align: center; color: #94a3b8; margin-bottom: 1rem;">Unlock premium astrology consultation</p>
+                <div class="payment-price">₹21/question</div>
+                <p style="text-align: center; font-size: 0.9rem; color: #94a3b8;">Base: ₹20 + GST (5%): ₹1</p>
+                
+                <p style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: #d4af37;"><strong>Select Payment Method:</strong></p>
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPayment('upi')">
+                        <div style="font-size: 2rem;">📱</div>
+                        <div>UPI</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('card')">
+                        <div style="font-size: 2rem;">💳</div>
+                        <div>Card</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('netbanking')">
+                        <div style="font-size: 2rem;">🏦</div>
+                        <div>Net Banking</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('wallet')">
+                        <div style="font-size: 2rem;">👛</div>
+                        <div>Wallet</div>
+                    </div>
+                </div>
+                
+                <button id="pay-btn" class="pay-btn" disabled onclick="processPayment()">Pay ₹21</button>
+                <button style="width: 100%; margin-top: 0.5rem; padding: 0.5rem; background: rgba(107, 70, 193, 0.2); border: 1px solid rgba(107, 70, 193, 0.4); border-radius: 8px; color: #94a3b8; cursor: pointer;" onclick="closePaymentModal()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <textarea 
+                id="chat-input" 
+                class="chat-input" 
+                placeholder="Ask me anything about astrology..."
+                rows="2"
+            ></textarea>
+            <button id="send-btn" class="send-btn" disabled>Send</button>
+        </div>
+        <div style="padding: 1rem; text-align: center;">
+            <button class="download-btn" onclick="downloadChatHistory()">📄 Download Chat Notes</button>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>World's Most Accurate<br>Astrology AI</h1>
+            <p class="subtitle">
+                Unravel the mysteries of life-journeys. Receive personalized guidance for your questions, 
+                detailed reports on complex situations, and much more.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openChat()">🔮 Start Free Consultation</button>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <h2 class="section-title">Unravel the Mysteries of Life-Journeys</h2>
+            <p class="section-subtitle">
+                Receive personalized and real-time guidance for your life questions, along with daily insights, 
+                compatibility checks, and much more.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Life Insights</h3>
+                    <p>Explore the depths of your past, gain insight into the present, and embrace a future filled with possibilities. Navigate life with greater awareness.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💑</div>
+                    <h3>Compatibility Check</h3>
+                    <p>Get insights into the cosmic dynamics between you and your partner. Unveil the strengths, challenges, and unique chemistry that exists.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Career Guidance</h3>
+                    <p>Navigate complexities of career, health, relationships. Know when to be on the front foot, and when to be on the back foot.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌗</div>
+                    <h3>Dual Traditions</h3>
+                    <p>Comprehensive analysis using both Tropical (Western) and Sidereal (Vedic) astrology with proper ayanamsa calculations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Cultural Adaptation</h3>
+                    <p>Tailored remedies for Hindu, Buddhist, Christian, Muslim, Jewish, Sikh, and secular approaches. Respects your beliefs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Cusp Analysis</h3>
+                    <p>Deep analysis of moving degrees, liminal positions, intercepted planets, and planetary dignity by degree, sign, and house.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="section" id="mission" style="background: rgba(107, 70, 193, 0.05); border-radius: 2rem; margin: 3rem auto; padding: 4rem 2rem;">
+            <h2 class="section-title">Our Mission</h2>
+            <p class="section-subtitle">
+                At Knowlzastro, our mission is to empower individuals to live fulfilling lives by harnessing 
+                the wisdom of astrology as a trusted guiding force. We are fully committed to unravel the 
+                intricate mysteries that shape our unique life-journeys.
+            </p>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section" id="testimonials" style="padding-top: 2rem;">
+            <h2 class="section-title">What People Say</h2>
+            <p class="section-subtitle">Average rating: 4.9/5 ⭐</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <p style="font-style: italic; color: #e2e8f0;">"It's truly fascinating to witness the fusion of Vedic sciences with cutting-edge AI technology. The guidance is remarkably accurate and culturally sensitive."</p>
+                    <h3 style="margin-top: 1rem;">- Priya S.</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Mumbai, India</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <p style="font-style: italic; color: #e2e8f0;">"Knowlzastro helped me navigate my career transition with incredible accuracy. The remedies were perfectly aligned with my Buddhist beliefs."</p>
+                    <h3 style="margin-top: 1rem;">- David M.</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">San Francisco, USA</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <p style="font-style: italic; color: #e2e8f0;">"As someone new to astrology, I found the explanations clear and the guidance practical. The secular approach was exactly what I needed."</p>
+                    <h3 style="margin-top: 1rem;">- Sarah K.</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">London, UK</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatPopup = document.getElementById('chat-popup');
+
+        // Session memory to store birth details
+        let sessionMemory = {
+            dateOfBirth: null,
+            timeOfBirth: null,
+            placeOfBirth: null,
+            nationality: null,
+            religion: null,
+            taboos: null,
+            hasPaid: false,
+            questionCount: 0
+        };
+        
+        const PER_QUESTION_PRICE = 20; // Rs 20 per question
+        const GST_RATE = 0.05; // 5% GST
+
+        chatInput.addEventListener('input', () => {
+            sendBtn.disabled = chatInput.value.trim() === '';
+        });
+
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!sendBtn.disabled) sendMessage();
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        function toggleChat() {
+            chatPopup.classList.toggle('active');
+            if (chatPopup.classList.contains('active')) {
+                setTimeout(() => chatInput.focus(), 300);
+            }
+        }
+
+        function openChat() {
+            chatPopup.classList.add('active');
+            setTimeout(() => chatInput.focus(), 300);
+        }
+
+        function closeChat() {
+            chatPopup.classList.remove('active');
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'user');
+            chatInput.value = '';
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Sending...';
+
+            try {
+                const response = await generateResponse(message);
+                addMessage(response, 'ai');
+            } catch (error) {
+                addMessage('<p><strong>Error:</strong> Failed to get response. Please try again.</p>', 'ai');
+            } finally {
+                sendBtn.textContent = 'Send';
+                sendBtn.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        function addMessage(content, type) {
+            const div = document.createElement('div');
+            div.className = `message ${type}-message`;
+            div.innerHTML = `
+                <div class="message-avatar">${type === 'ai' ? '🐼' : '👤'}</div>
+                <div class="message-content">${content}</div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function generateResponse(message) {
+            // Direct demo mode - no API integration
+            return generateIntelligentResponse(message);
+        }
+
+        function extractAndStoreBirthDetails(message) {
+            const lowerMsg = message.toLowerCase();
+            
+            // Extract date
+            const dateMatch = message.match(/(\d{1,2}[-/]\d{1,2}[-/]\d{4}|\d{1,2}[-/]\d{1,2}[-/]\d{2})/);
+            if (dateMatch && !sessionMemory.dateOfBirth) {
+                sessionMemory.dateOfBirth = dateMatch[0];
+            }
+            
+            // Extract time
+            const timeMatch = message.match(/(\d{1,2}):(\d{2})/);
+            if (timeMatch && !sessionMemory.timeOfBirth) {
+                sessionMemory.timeOfBirth = timeMatch[0];
+            }
+            
+            // Extract place - improved detection
+            if (!sessionMemory.placeOfBirth) {
+                // Pattern 1: "place is X" or "born in X"
+                const placePattern1 = /(?:place is|place|born in|location is|city is|from)\s+([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)/i;
+                const match1 = message.match(placePattern1);
+                if (match1) {
+                    sessionMemory.placeOfBirth = match1[1];
+                } else {
+                    // Pattern 2: Just a word after "place"
+                    const placePattern2 = /place\s+([a-zA-Z]+)/i;
+                    const match2 = message.match(placePattern2);
+                    if (match2) {
+                        sessionMemory.placeOfBirth = match2[1].charAt(0).toUpperCase() + match2[1].slice(1);
+                    } else {
+                        // Pattern 3: Known cities
+                        const cities = ['Mumbai', 'Delhi', 'Bangalore', 'Kolkata', 'Chennai', 'Hyderabad', 'Pune', 'Gurgaon', 'Noida', 'Ahmedabad', 'Ganganagar', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Thane', 'Bhopal', 'Vishakhapatnam', 'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik', 'Faridabad', 'Meerut'];
+                        for (let city of cities) {
+                            if (lowerMsg.includes(city.toLowerCase())) {
+                                sessionMemory.placeOfBirth = city;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Extract nationality
+            if ((lowerMsg.includes('nationality') || lowerMsg.includes('country') || lowerMsg.includes('from')) && 
+                !sessionMemory.nationality) {
+                const countryMatch = message.match(/\b(India|USA|UK|Canada|Australia|Germany|France|Japan|China|Dubai|Singapore)\b/i);
+                if (countryMatch) {
+                    sessionMemory.nationality = countryMatch[0];
+                }
+            }
+            
+            // Extract religion
+            if ((lowerMsg.includes('religion') || lowerMsg.includes('hindu') || lowerMsg.includes('muslim') || 
+                 lowerMsg.includes('christian') || lowerMsg.includes('buddhist') || lowerMsg.includes('secular')) && 
+                !sessionMemory.religion) {
+                const religions = ['hindu', 'muslim', 'christian', 'buddhist', 'sikh', 'jain', 'jewish', 'secular', 'non-religious'];
+                for (let rel of religions) {
+                    if (lowerMsg.includes(rel)) {
+                        sessionMemory.religion = rel;
+                        break;
+                    }
+                }
+            }
+        }
+
+        function generateIntelligentResponse(message) {
+            const lowerMsg = message.toLowerCase();
+            let response = '';
+            
+            // Extract and store any birth details from the message
+            extractAndStoreBirthDetails(message);
+            
+            // Check what we have in memory
+            const hasDate = sessionMemory.dateOfBirth;
+            const hasTime = sessionMemory.timeOfBirth;
+            const hasPlace = sessionMemory.placeOfBirth;
+            
+            if (hasDate && hasTime && hasPlace) {
+                // All 3 details provided - proceed to payment
+                if (!sessionMemory.hasPaid) {
+                    const dateStr = sessionMemory.dateOfBirth;
+                    const timeStr = sessionMemory.timeOfBirth;
+                    const placeStr = sessionMemory.placeOfBirth;
+                    
+                    response = '<p><strong>✅ Namaste! Birth Details Confirmed</strong></p>' +
+                               '<p>📅 Date: ' + dateStr + '<br>' +
+                               '⏰ Time: ' + timeStr + '<br>' +
+                               '📍 Place: ' + placeStr + '</p>' +
+                    '<p><strong>🔮 Premium Astrological Consultation</strong></p>' +
+                    '<p>To receive detailed AI-powered analysis, please proceed with payment.</p>' +
+                    '<p><strong>Pricing:</strong> ₹20 + 5% GST per question</p>' +
+                    '<p>Click below to proceed with payment:</p>' +
+                    '<button style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 0.75rem 1.5rem; border-radius: 8px; border: none; color: white; font-weight: 600; cursor: pointer; margin-top: 0.5rem;" onclick="checkAndShowPayment()">💳 Proceed to Payment (₹21)</button>';
+                    return response;
+                } else {
+                    // User has paid, provide premium responses
+                    const dateStr = sessionMemory.dateOfBirth;
+                    const timeStr = sessionMemory.timeOfBirth;
+                    const placeStr = sessionMemory.placeOfBirth;
+                    
+                    response = '<p><strong>🔮 Premium Analysis Active!</strong></p>' +
+                               '<p>Based on your birth chart (Date: ' + dateStr + ', Time: ' + timeStr + ', Place: ' + placeStr + '), I\'ll provide detailed guidance.</p>' +
+                               '<p><strong>🗣️ Ask me anything:</strong></p>' +
+                               '<p>• Career predictions and timing<br>' +
+                               '• Relationship and marriage prospects<br>' +
+                               '• Health and wellness guidance<br>' +
+                               '• Financial prosperity periods<br>' +
+                               '• Dasha and transit analysis<br>' +
+                               '• Personalized remedies</p>';
+                    return response;
+                }
+            } else {
+                // Missing some details - show what we have and what's still needed
+                let missing = [];
+                let have = [];
+                
+                if (sessionMemory.dateOfBirth) {
+                    have.push('✅ Date: ' + sessionMemory.dateOfBirth);
+                } else {
+                    missing.push('📅 Date of Birth');
+                }
+                
+                if (sessionMemory.timeOfBirth) {
+                    have.push('✅ Time: ' + sessionMemory.timeOfBirth);
+                } else {
+                    missing.push('⏰ Time of Birth');
+                }
+                
+                if (sessionMemory.placeOfBirth) {
+                    have.push('✅ Place: ' + sessionMemory.placeOfBirth);
+                } else {
+                    missing.push('📍 Place of Birth');
+                }
+                
+                if (missing.length > 0) {
+                    let statusText = '';
+                    if (have.length > 0) {
+                        statusText = '<p><strong>What I have:</strong></p><p>' + have.join('<br>') + '</p><p><strong>Still need:</strong></p><p>' + missing.join('<br>') + '</p><p><em>You can provide all three at once or one by one!</em></p>';
+                    } else {
+                        statusText = '<p><strong>I need these 3 details:</strong></p><p>' + missing.join('<br>') + '</p><p><em>Please share them - all together or one by one.</em></p>';
+                    }
+                    response = '<p><strong>Thank you! 🙏</strong></p>' + statusText;
+                } else {
+                    const welcomeResponses = [
+                        '<p><strong>Welcome to Knowlzastro! 🔮</strong></p>' +
+                        '<p>I\'m your expert astrological consultant (200 years expertise).</p>' +
+                        '<p><strong>Please share these 3 details:</strong></p>' +
+                        '<p>📅 <strong>Date of Birth</strong> (e.g., 14-08-1985)<br>' +
+                        '⏰ <strong>Time of Birth</strong> (e.g., 15:05)<br>' +
+                        '📍 <strong>Place of Birth</strong> (e.g., Mumbai, India)</p>',
+                        
+                        '<p><strong>🔮 Namaste! I\'m your Pandit AI</strong></p>' +
+                        '<p>To begin, I need:</p>' +
+                        '<p>1️⃣ Date of Birth<br>' +
+                        '2️⃣ Time of Birth<br>' +
+                        '3️⃣ Place of Birth</p>' +
+                        '<p><em>Share all at once or one by one!</em></p>'
+                    ];
+                    response = welcomeResponses[Math.floor(Math.random() * welcomeResponses.length)];
+                }
+            }
+            
+            return response;
+        }
+
+        function downloadChatHistory() {
+            const messages = Array.from(chatMessages.querySelectorAll('.message'));
+            const messagesText = ['=== KNOWLZASTRO CHAT HISTORY ===', '', 
+                                  'Date: ' + new Date().toLocaleString(), '', 
+                                  'Disclaimer: This astrological consultation is generated by AI and should be used for informational purposes only. Predictions and recommendations cannot be claimed as legal dispute or binding advice. Please consult qualified professionals for important life decisions.', '', ''];
+            
+            messages.forEach(msg => {
+                const isAI = msg.classList.contains('ai-message');
+                const role = isAI ? 'Pandit AI' : 'You';
+                const content = msg.querySelector('.message-content').textContent.trim();
+                messagesText.push(`${role}:`);
+                messagesText.push(content);
+                messagesText.push('');
+            });
+            
+            messagesText.push('');
+            messagesText.push('=== IMPORTANT DISCLAIMER ===');
+            messagesText.push('This astrological consultation is for entertainment and informational purposes only.');
+            messagesText.push('The predictions and recommendations provided are AI-generated and not legally binding.');
+            messagesText.push('App generated predictions cannot be used as evidence in any legal dispute.');
+            messagesText.push('Always consult qualified professionals for important life, financial, medical, or legal decisions.');
+            messagesText.push('');
+            messagesText.push('Generated by: Knowlzastro - AI Astrology Consultant');
+            
+            const textContent = messagesText.join('\n');
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Knowlzastro_Chat_' + new Date().getTime() + '.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Payment Functions
+        let selectedPaymentMethod = null;
+        
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('pay-btn').disabled = false;
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Simulate payment processing
+            const paymentModal = document.getElementById('payment-modal');
+            paymentModal.classList.remove('active');
+            
+            // Mark as paid
+            sessionMemory.hasPaid = true;
+            
+            // Show success and trigger response
+            const response = '<p><strong>✅ Payment Successful!</strong></p>' +
+                           '<p>You now have access to premium astrology consultation.</p>' +
+                           '<p><strong>Total Paid:</strong> ₹21 (₹20 + ₹1 GST)</p>' +
+                           '<p>You can now ask unlimited questions at ₹21 per question.</p>';
+            addMessage(response, 'ai');
+            
+            // Update chat
+            setTimeout(() => {
+                chatInput.focus();
+            }, 100);
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.remove('active');
+        }
+        
+        // Check if payment needed after getting all 3 details
+        function checkAndShowPayment() {
+            if (sessionMemory.dateOfBirth && sessionMemory.timeOfBirth && sessionMemory.placeOfBirth && !sessionMemory.hasPaid) {
+                document.getElementById('payment-modal').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
