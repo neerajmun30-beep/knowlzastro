@@ -1,0 +1,51 @@
+{
+  "name": "Knowlzastro - World's Most Accurate Astrology AI",
+  "short_name": "Knowlzastro",
+  "description": "Get personalized astrology insights, predictions, and guidance from Bhagywani AI",
+  "start_url": "/final-desktop.html",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#6b46c1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "entertainment", "education"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Chat with AI",
+      "short_name": "Chat",
+      "description": "Start chatting with Bhagywani AI",
+      "url": "/final desktop.html#chat",
+      "icons": [
+        {
+          "src": "icons/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ]
+}
+

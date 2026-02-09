@@ -14,36 +14,46 @@
         Generate using: generate-icons.html or https://realfavicongenerator.net/
         Recommended: Use crystal ball (🔮) or astrology symbol
     -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <!-- PNG favicons - Add these files to icons/ folder for better browser support -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192x192.png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest-mobile.json">
+    <meta name="theme-color" content="#0a0e1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bhagywani">
     <meta name="description" content="Knowlzastro - World's Most Accurate Astrology AI. Get personalized astrology insights, predictions, and guidance from Bhagywani AI.">
     <meta name="keywords" content="astrology, AI, astrologer, horoscope, predictions, guidance, personalized, expert, accurate">
     <meta name="author" content="Knowlzastro">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="google" content="notranslate">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; connect-src 'self' http://localhost:4000 https://localhost:4000 http://127.0.0.1:4000 https://api.openai.com https://generativelanguage.googleapis.com https://cdnjs.cloudflare.com ws://localhost:4000 wss://localhost:4000;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; connect-src 'self' http://localhost:4000 https://localhost:4000 http://127.0.0.1:4000 https://api.openai.com https://generativelanguage.googleapis.com https://cdnjs.cloudflare.com https://api.knowlzastro.com https://dev-api.knowlzastro.com ws://localhost:4000 wss://localhost:4000 wss://api.knowlzastro.com;">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- API Configuration - Load first to set environment-based URLs -->
-    <script src="assets/js/config.js"></script>
+    <script src="js/config.js"></script>
     <!-- Form Validation - Load for client-side validation -->
-    <script src="assets/js/form-validation.js"></script>
+    <script src="js/form-validation.js"></script>
     <!-- Gemini AI Integration - Load for AI-powered reports -->
-    <script src="assets/js/gemini-ai-integration.js"></script>
+    <script src="js/gemini-ai-integration.js"></script>
     <!-- Backend API Client - Load early for initialization -->
-    <script src="assets/js/api-client.js"></script>
+    <script src="js/api-client.js"></script>
     <!-- Chart Renderer - Load for chart functionality -->
-    <script src="assets/js/chart-renderer.js"></script>
+    <script src="js/chart-renderer.js"></script>
     <!-- VedAstro Integration - Load for all vedastro.org features -->
-    <script src="assets/js/vedastro-integration.js"></script>
+    <script src="js/vedastro-integration.js"></script>
     <!-- Kundli Engine - North Indian Kundli SVG renderer -->
-    <script src="assets/js/kundli-engine.js"></script>
+    <script src="js/kundli-engine.js"></script>
     <!-- Astrology API Client - Frontend wrapper for /api/astrology endpoint -->
-    <script src="assets/js/astrology-api-client.js"></script>
+    <script src="js/astrology-api-client.js"></script>
     <!-- Unified Navigation Component -->
-    <script src="assets/js/unified-navigation.js"></script>
+    <script src="js/unified-navigation.js"></script>
     <!-- Unified Button Styles -->
-    <link rel="stylesheet" href="assets/css/unified-buttons.css">
+    <link rel="stylesheet" href="css/unified-buttons.css">
     
     <!-- ============================================
          NEW ENHANCEMENTS - MODULAR FEATURES
@@ -52,26 +62,24 @@
          ============================================ -->
     
     <!-- Enhanced Geolocation Database with Autocomplete -->
-    <script src="assets/js/geolocation-enhanced.js"></script>
+    <script src="js/geolocation-enhanced.js"></script>
     
     <!-- Enhanced AI NLP for Astrology Chat -->
-    <script src="assets/js/ai-nlp-enhanced.js"></script>
+    <script src="js/ai-nlp-enhanced.js"></script>
     
     <!-- Dynamic Horoscope Prediction Engines -->
-    <script src="assets/js/horoscope-engines.js"></script>
+    <script src="js/horoscope-engines.js"></script>
     
     <!-- Live Astrologer Consultation Features -->
-    <script src="assets/js/live-consultation.js"></script>
+    <script src="js/live-consultation.js"></script>
     
     <!-- UX Enhancements (Voice, Dark Mode, Multilingual, Social) -->
-    <script src="assets/js/ux-enhancements.js"></script>
+    <script src="js/ux-enhancements.js"></script>
     
     <!-- Security Hardening -->
-    <script src="assets/js/security-enhanced.js"></script>
+    <script src="js/security-enhanced.js"></script>
     <!-- Error Handler - Centralized error handling for offline/API failures -->
-    <script src="assets/js/error-handler.js"></script>
-    <!-- AI Self-Healing & Self-Repair System - Advanced AI-powered auto-recovery -->
-    <script src="assets/js/ai-self-healing.js"></script>
+    <script src="js/error-handler.js"></script>
     
     <!-- CRITICAL: Define all global functions immediately in HEAD so they're available for onclick handlers -->
     <script>
@@ -1878,7 +1886,7 @@
 
     <!-- Floating Chat Widget -->
     <div class="chat-widget" style="position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; z-index: 999999 !important; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: all !important;">
-                <div class="pandit-avatar" onclick="window.toggleChat();" title="Chat with Bhagyawani AI" style="cursor: pointer; pointer-events: all !important;">⚫</div>
+        <div class="pandit-avatar" onclick="window.toggleChat();" title="Chat with Bhagywani AI" style="cursor: pointer; pointer-events: all !important;">⚫</div>
     </div>
 
     <!-- Chat Popup -->
@@ -1886,7 +1894,7 @@
         <div class="chat-popup-header">
             <div class="pandit-avatar">⚫</div>
             <div class="chat-popup-header-info">
-                <h3>Bhagyawani</h3>
+                <h3>Bhagywani</h3>
                 <p>AI Astrologer by Knowlzastro</p>
             </div>
             <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center; margin-left: auto;">
@@ -1940,10 +1948,7 @@
                         <a href="pages/north-south-chart-toggle.html" class="chat-nav-item" style="display: block; padding: 0.75rem 1rem; margin: 0.25rem 0; border-radius: 8px; color: #e2e8f0; text-decoration: none;">🔄 Chart Style Toggle</a>
                     </div>
                 </div>
-                <div id="chat-profile-actions" style="display: none; gap: 0.5rem; align-items: center;">
-                    <button id="chat-add-profile-btn" class="add-profile-btn" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; cursor: pointer; border-radius: 6px; font-weight: 500;" onclick="addNewProfile()" title="Add New Profile">➕ New Profile</button>
-                    <button id="chat-logout-btn" class="logout-btn" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(220, 38, 38, 0.4); color: #ef4444; cursor: pointer; border-radius: 6px; font-weight: 500;" onclick="signOutFromChat()" title="Logout">Logout</button>
-                </div>
+                <button id="chat-logout-btn" class="logout-btn" style="display: none; padding: 0.4rem 0.8rem; font-size: 0.85rem; background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(220, 38, 38, 0.4); color: #ef4444; cursor: pointer;" onclick="signOutFromChat()">Logout</button>
                 <button id="chat-minimize-btn" class="chat-header-btn" onclick="window.minimizeChat();" title="Minimize Chat" style="background: rgba(107, 70, 193, 0.2); border: 1px solid rgba(107, 70, 193, 0.4); color: #cbd5e1; padding: 0.4rem; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">−</button>
                 <button id="chat-restore-btn" class="chat-header-btn" onclick="window.restoreChat();" title="Restore Chat" style="display: none; background: rgba(107, 70, 193, 0.2); border: 1px solid rgba(107, 70, 193, 0.4); color: #cbd5e1; padding: 0.4rem; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">⬆</button>
                 <button id="chat-close-btn" class="chat-header-btn" onclick="window.closeChat();" title="Close Chat" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; padding: 0.4rem; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.2rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">×</button>
@@ -2086,14 +2091,14 @@
                     <div class="namaste-bubble">
                         <div class="chat-icon-top">💬</div>
                         <div style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 800;">NAMASTE!</div>
-                        <div style="font-weight: 400; font-size: 1rem;">I'm Bhagyawani, how may I help you?</div>
+                        <div style="font-weight: 400; font-size: 1rem;">I'm Bhagywani, how may I help you?</div>
                     </div>
                 </div>
             </div>
             <div class="message ai-message">
                 <div class="message-avatar">⚫</div>
                 <div class="message-content">
-                    <p>Namaste! 🙏 I'm <strong>Bhagyawani</strong>, your AI astrologer from Knowlzastro!</p>
+                    <p>Namaste! 🙏 I'm <strong>Bhagywani</strong>, your AI astrologer from Knowlzastro!</p>
                     <p>I'm your expert astrological consultant with 200 years of expertise.</p>
                     <p>Your profile has been created. Now you can ask me anything about astrology!</p>
                     <p>What would you like to know?</p>
@@ -2791,7 +2796,7 @@
             welcomeDiv.innerHTML = `
                 <div class="message-avatar">⚫</div>
                 <div class="message-content">
-                    <p>Namaste! 🙏 I'm <strong>Bhagyawani</strong>, your AI astrologer from Knowlzastro!</p>
+                    <p>Namaste! 🙏 I'm <strong>Bhagywani</strong>, your AI astrologer from Knowlzastro!</p>
                     <p>I'm your expert astrological consultant with 200 years of expertise.</p>
                     <p>You can ask me anything about astrology. What would you like to know?</p>
                     ${!currentUser ? '<p style="margin-top: 0.5rem; font-size: 0.85rem; color: #94a3b8;"><em>💡 Tip: Login to save your profile and access advanced features.</em></p>' : ''}
@@ -3472,17 +3477,6 @@
             sendBtn.disabled = true;
             sendBtn.textContent = 'Sending...';
             
-            // Show typing indicator with user-friendly message
-            let typingMessageId = 'typing-indicator-' + Date.now();
-            const loadingMessages = [
-                '🔮 Bhagywani is analysing your chart...',
-                '⭐ Bhagywani is analysing planet positions...',
-                '✨ Bhagywani is consulting the cosmos...',
-                '🌟 Bhagywani is interpreting planetary influences...'
-            ];
-            const randomLoadingMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
-            addTypingIndicator(randomLoadingMessage, typingMessageId);
-            
             // Update question count and user activity BEFORE processing
             if (isFirstQuestionFree) {
                 // First question is FREE (new email, not in last 2 minutes)
@@ -3876,11 +3870,6 @@
                     }
                 }
                 
-                // Remove typing indicator before showing response
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
-                
                 // Ensure response is properly formatted
                 if (typeof response === 'string' && !response.includes('<p>')) {
                     response = '<p>' + response.replace(/\n/g, '</p><p>') + '</p>';
@@ -4090,16 +4079,8 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
                 }
             } catch (error) {
                 console.error('❌ Chat error:', error);
-                // Remove typing indicator on error
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
                 addMessage('<p><strong>Error:</strong> Failed to get response. Please try again.</p>', 'ai');
             } finally {
-                // Ensure typing indicator is removed
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
                 sendBtn.textContent = 'Send';
                 sendBtn.disabled = chatInput.value.trim() === '';
                 if (chatInput) chatInput.focus();
@@ -4144,56 +4125,6 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             console.log('✅ Message added to chat');
-        }
-        
-        // Add typing indicator function
-        function addTypingIndicator(message, messageId) {
-            const chatMessages = document.getElementById('chat-messages');
-            if (!chatMessages) return null;
-            
-            const typingDiv = document.createElement('div');
-            typingDiv.id = messageId;
-            typingDiv.className = 'message ai-message typing-indicator';
-            typingDiv.innerHTML = `
-                <div class="message-avatar">
-                    <span class="chakra-icon">⚫</span>
-                </div>
-                <div class="message-content">
-                    <p style="color: #d4af37; font-style: italic;">${message}</p>
-                    <div class="typing-dots" style="display: inline-flex; gap: 4px; margin-left: 8px;">
-                        <span style="animation: typing 1.4s infinite;">.</span>
-                        <span style="animation: typing 1.4s infinite 0.2s;">.</span>
-                        <span style="animation: typing 1.4s infinite 0.4s;">.</span>
-                    </div>
-                </div>
-            `;
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            return typingDiv;
-        }
-        
-        // Remove typing indicator
-        function removeTypingIndicator(messageId) {
-            const typingDiv = document.getElementById(messageId);
-            if (typingDiv) {
-                typingDiv.remove();
-            }
-        }
-        
-        // Add CSS for typing animation
-        if (!document.getElementById('typing-indicator-style')) {
-            const style = document.createElement('style');
-            style.id = 'typing-indicator-style';
-            style.textContent = `
-                @keyframes typing {
-                    0%, 60%, 100% { opacity: 0.3; }
-                    30% { opacity: 1; }
-                }
-                .typing-indicator {
-                    opacity: 0.9;
-                }
-            `;
-            document.head.appendChild(style);
         }
         
         // Make addMessage globally accessible
@@ -5876,94 +5807,21 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
         
         // Update chat UI with login/logout buttons
         function updateChatUI() {
-            // Update chat header with profile actions (logout and add new profile)
-            const chatProfileActions = document.getElementById('chat-profile-actions');
+            // Update chat header with logout button (login is now in chat box)
             const chatLogoutBtn = document.getElementById('chat-logout-btn');
-            const chatAddProfileBtn = document.getElementById('chat-add-profile-btn');
             const chatUserInfo = document.getElementById('chat-user-info');
             
             if (currentUser) {
-                // Show profile actions when logged in
-                if (chatProfileActions) {
-                    chatProfileActions.style.display = 'flex';
-                }
                 if (chatLogoutBtn) chatLogoutBtn.style.display = 'block';
-                if (chatAddProfileBtn) chatAddProfileBtn.style.display = 'block';
                 if (chatUserInfo) {
                     chatUserInfo.style.display = 'inline-block';
                     chatUserInfo.textContent = currentUser.email || currentUser.mobile || 'User';
                 }
             } else {
-                // Hide profile actions when not logged in
-                if (chatProfileActions) {
-                    chatProfileActions.style.display = 'none';
-                }
                 if (chatLogoutBtn) chatLogoutBtn.style.display = 'none';
-                if (chatAddProfileBtn) chatAddProfileBtn.style.display = 'none';
                 if (chatUserInfo) chatUserInfo.style.display = 'none';
             }
         }
-        
-        // Add new profile function - clears current profile and shows profile creation form
-        window.addNewProfile = function() {
-            if (!currentUser) {
-                alert('Please login first to create a profile.');
-                showLoginOverlay();
-                return;
-            }
-            
-            if (confirm('Create a new profile? This will clear your current profile data. You can always create another profile later.')) {
-                // Clear current profile data
-                const userProfileKey = `user_profile_${currentUser?.email || currentUser?.mobile || ''}`;
-                if (userProfileKey && userProfileKey !== 'user_profile_') {
-                    localStorage.removeItem(userProfileKey);
-                }
-                localStorage.removeItem('user_profile');
-                
-                // Reset session memory (keep user login, but clear birth details)
-                const currentSessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
-                currentSessionMemory.dateOfBirth = null;
-                currentSessionMemory.timeOfBirth = null;
-                currentSessionMemory.placeOfBirth = null;
-                currentSessionMemory.email = null;
-                currentSessionMemory.mobile = null;
-                currentSessionMemory.questionCount = 0;
-                currentSessionMemory.paymentCredits = 0;
-                currentSessionMemory.firstQuestionFree = false;
-                localStorage.setItem('session_memory', JSON.stringify(currentSessionMemory));
-                
-                // Update global sessionMemory
-                if (window.sessionMemory) {
-                    window.sessionMemory.dateOfBirth = null;
-                    window.sessionMemory.timeOfBirth = null;
-                    window.sessionMemory.placeOfBirth = null;
-                    window.sessionMemory.email = null;
-                    window.sessionMemory.mobile = null;
-                    window.sessionMemory.questionCount = 0;
-                    window.sessionMemory.paymentCredits = 0;
-                    window.sessionMemory.firstQuestionFree = false;
-                }
-                
-                // Show profile creation form
-                showProfileInChat();
-                
-                // Show success message
-                const chatMessages = document.getElementById('chat-messages');
-                if (chatMessages) {
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'message ai-message';
-                    successMsg.innerHTML = `
-                        <div class="message-avatar">✨</div>
-                        <div class="message-content">
-                            <p><strong>New Profile Ready!</strong></p>
-                            <p>Please fill in your birth details to create your new profile.</p>
-                        </div>
-                    `;
-                    chatMessages.appendChild(successMsg);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
-        };
 
         // ============================================
         // PERMISSION CHECK SYSTEM
@@ -6040,7 +5898,12 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             }
             
             try {
-                const response = await fetch('http://localhost:4000/api/health');
+                const healthUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.healthCheck) 
+                    ? API_CONFIG.healthCheck 
+                    : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                        ? 'http://localhost:4000/api/health'
+                        : 'https://api.knowlzastro.com/api/health');
+                const response = await fetch(healthUrl);
                 if (response.ok) {
                     return { available: true, message: 'Vedic API connected' };
                 }
@@ -7060,20 +6923,14 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
         // Sign out from chat - clears profile and shows login
         function signOutFromChat() {
             if (confirm('Are you sure you want to sign out? Your profile will be cleared and you can login again to change it.')) {
-                // Store user info before clearing
-                const userEmail = currentUser?.email;
-                const userMobile = currentUser?.mobile;
-                
                 // Clear current user
                 currentUser = null;
                 localStorage.removeItem('current_user');
                 
                 // Clear profile (one profile per user)
-                if (userEmail || userMobile) {
-                    const userProfileKey = `user_profile_${userEmail || userMobile || ''}`;
-                    if (userProfileKey && userProfileKey !== 'user_profile_') {
-                        localStorage.removeItem(userProfileKey);
-                    }
+                const userProfileKey = `user_profile_${currentUser?.email || currentUser?.mobile || ''}`;
+                if (userProfileKey && userProfileKey !== 'user_profile_') {
+                    localStorage.removeItem(userProfileKey);
                 }
                 localStorage.removeItem('user_profile'); // Also clear global profile
                 
@@ -7087,30 +6944,16 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
                     taboos: null,
                     hasPaid: false,
                     questionCount: 0,
-                    paymentCredits: 0,
-                    firstQuestionFree: false,
-                    userId: null,
-                    email: null,
-                    mobile: null
+                    userId: null
                 };
                 localStorage.removeItem('session_memory');
                 
-                // Update global sessionMemory
-                if (window.sessionMemory) {
-                    Object.assign(window.sessionMemory, sessionMemory);
-                }
-                
                 // Reset login form
-                const loginStep1 = document.getElementById('chat-login-step-1');
-                const loginStep2 = document.getElementById('chat-login-step-2');
-                if (loginStep1) loginStep1.style.display = 'block';
-                if (loginStep2) loginStep2.style.display = 'none';
-                const mobileInput = document.getElementById('chat-login-mobile-input');
-                const emailInput = document.getElementById('chat-login-email-input');
-                const otpInput = document.getElementById('chat-login-otp-input');
-                if (mobileInput) mobileInput.value = '';
-                if (emailInput) emailInput.value = '';
-                if (otpInput) otpInput.value = '';
+                document.getElementById('chat-login-step-1').style.display = 'block';
+                document.getElementById('chat-login-step-2').style.display = 'none';
+                document.getElementById('chat-login-mobile-input').value = '';
+                document.getElementById('chat-login-email-input').value = '';
+                document.getElementById('chat-login-otp-input').value = '';
                 
                 // Update UI and show login section
                 updateChatUI();
@@ -7534,18 +7377,7 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             // This will be called when user opens chat
             
             // Check backend API health
-            if (typeof window.APIClient !== 'undefined' && typeof window.APIClient.checkBackendHealth === 'function') {
-                window.APIClient.checkBackendHealth().then(isHealthy => {
-                    if (isHealthy) {
-                        console.log('✅ Backend API is healthy and ready');
-                    } else {
-                        console.warn('⚠️ Backend API is not available. Some features may not work.');
-                        console.warn('   Make sure the backend server is running on http://localhost:4000');
-                    }
-                });
-            } else {
-                console.warn('⚠️ API Client not loaded. Make sure assets/js/api-client.js is loaded.');
-            }
+            checkBackendHealth();
             
             // Track visitor data
             trackVisitorData();
@@ -8291,6 +8123,21 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             document.getElementById('login-otp').value = '';
         };
         
+    </script>
+    
+    <!-- Service Worker Registration for PWA (Mobile) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw-mobile.js')
+                    .then(registration => {
+                        console.log('✅ Bhagywani Mobile - Service Worker registered:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('⚠️ Service Worker registration failed:', error);
+                    });
+            });
+        }
     </script>
 
 </body>

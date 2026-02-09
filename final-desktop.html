@@ -14,36 +14,46 @@
         Generate using: generate-icons.html or https://realfavicongenerator.net/
         Recommended: Use crystal ball (🔮) or astrology symbol
     -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <!-- PNG favicons - Add these files to icons/ folder for better browser support -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192x192.png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest-desktop.json">
+    <meta name="theme-color" content="#6b46c1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Knowlzastro">
     <meta name="description" content="Knowlzastro - World's Most Accurate Astrology AI. Get personalized astrology insights, predictions, and guidance from Bhagywani AI.">
     <meta name="keywords" content="astrology, AI, astrologer, horoscope, predictions, guidance, personalized, expert, accurate">
     <meta name="author" content="Knowlzastro">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="google" content="notranslate">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; connect-src 'self' http://localhost:4000 https://localhost:4000 http://127.0.0.1:4000 https://api.openai.com https://generativelanguage.googleapis.com https://cdnjs.cloudflare.com ws://localhost:4000 wss://localhost:4000;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; connect-src 'self' http://localhost:4000 https://localhost:4000 http://127.0.0.1:4000 https://api.openai.com https://generativelanguage.googleapis.com https://cdnjs.cloudflare.com https://api.knowlzastro.com https://dev-api.knowlzastro.com ws://localhost:4000 wss://localhost:4000 wss://api.knowlzastro.com;">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- API Configuration - Load first to set environment-based URLs -->
-    <script src="assets/js/config.js"></script>
+    <script src="js/config.js"></script>
     <!-- Form Validation - Load for client-side validation -->
-    <script src="assets/js/form-validation.js"></script>
+    <script src="js/form-validation.js"></script>
     <!-- Gemini AI Integration - Load for AI-powered reports -->
-    <script src="assets/js/gemini-ai-integration.js"></script>
+    <script src="js/gemini-ai-integration.js"></script>
     <!-- Backend API Client - Load early for initialization -->
-    <script src="assets/js/api-client.js"></script>
+    <script src="js/api-client.js"></script>
     <!-- Chart Renderer - Load for chart functionality -->
-    <script src="assets/js/chart-renderer.js"></script>
+    <script src="js/chart-renderer.js"></script>
     <!-- VedAstro Integration - Load for all vedastro.org features -->
-    <script src="assets/js/vedastro-integration.js"></script>
+    <script src="js/vedastro-integration.js"></script>
     <!-- Kundli Engine - North Indian Kundli SVG renderer -->
-    <script src="assets/js/kundli-engine.js"></script>
+    <script src="js/kundli-engine.js"></script>
     <!-- Astrology API Client - Frontend wrapper for /api/astrology endpoint -->
-    <script src="assets/js/astrology-api-client.js"></script>
+    <script src="js/astrology-api-client.js"></script>
     <!-- Unified Navigation Component -->
-    <script src="assets/js/unified-navigation.js"></script>
+    <script src="js/unified-navigation.js"></script>
     <!-- Unified Button Styles -->
-    <link rel="stylesheet" href="assets/css/unified-buttons.css">
+    <link rel="stylesheet" href="css/unified-buttons.css">
     
     <!-- ============================================
          NEW ENHANCEMENTS - MODULAR FEATURES
@@ -52,26 +62,26 @@
          ============================================ -->
     
     <!-- Enhanced Geolocation Database with Autocomplete -->
-    <script src="assets/js/geolocation-enhanced.js"></script>
+    <script src="js/geolocation-enhanced.js"></script>
     
     <!-- Enhanced AI NLP for Astrology Chat -->
-    <script src="assets/js/ai-nlp-enhanced.js"></script>
+    <script src="js/ai-nlp-enhanced.js"></script>
     
     <!-- Dynamic Horoscope Prediction Engines -->
-    <script src="assets/js/horoscope-engines.js"></script>
+    <script src="js/horoscope-engines.js"></script>
     
     <!-- Live Astrologer Consultation Features -->
-    <script src="assets/js/live-consultation.js"></script>
+    <script src="js/live-consultation.js"></script>
     
     <!-- UX Enhancements (Voice, Dark Mode, Multilingual, Social) -->
-    <script src="assets/js/ux-enhancements.js"></script>
+    <script src="js/ux-enhancements.js"></script>
     
     <!-- Security Hardening -->
-    <script src="assets/js/security-enhanced.js"></script>
+    <script src="js/security-enhanced.js"></script>
     <!-- Error Handler - Centralized error handling for offline/API failures -->
-    <script src="assets/js/error-handler.js"></script>
+    <script src="js/error-handler.js"></script>
     <!-- AI Self-Healing & Self-Repair System - Advanced AI-powered auto-recovery -->
-    <script src="assets/js/ai-self-healing.js"></script>
+    <script src="js/ai-self-healing.js"></script>
     
     <!-- CRITICAL: Define all global functions immediately in HEAD so they're available for onclick handlers -->
     <script>
@@ -1878,7 +1888,7 @@
 
     <!-- Floating Chat Widget -->
     <div class="chat-widget" style="position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; z-index: 999999 !important; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: all !important;">
-                <div class="pandit-avatar" onclick="window.toggleChat();" title="Chat with Bhagyawani AI" style="cursor: pointer; pointer-events: all !important;">⚫</div>
+        <div class="pandit-avatar" onclick="window.toggleChat();" title="Chat with Bhagywani AI" style="cursor: pointer; pointer-events: all !important;">⚫</div>
     </div>
 
     <!-- Chat Popup -->
@@ -1886,7 +1896,7 @@
         <div class="chat-popup-header">
             <div class="pandit-avatar">⚫</div>
             <div class="chat-popup-header-info">
-                <h3>Bhagyawani</h3>
+                <h3>Bhagywani</h3>
                 <p>AI Astrologer by Knowlzastro</p>
             </div>
             <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center; margin-left: auto;">
@@ -2086,14 +2096,14 @@
                     <div class="namaste-bubble">
                         <div class="chat-icon-top">💬</div>
                         <div style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 800;">NAMASTE!</div>
-                        <div style="font-weight: 400; font-size: 1rem;">I'm Bhagyawani, how may I help you?</div>
+                        <div style="font-weight: 400; font-size: 1rem;">I'm Bhagywani, how may I help you?</div>
                     </div>
                 </div>
             </div>
             <div class="message ai-message">
                 <div class="message-avatar">⚫</div>
                 <div class="message-content">
-                    <p>Namaste! 🙏 I'm <strong>Bhagyawani</strong>, your AI astrologer from Knowlzastro!</p>
+                    <p>Namaste! 🙏 I'm <strong>Bhagywani</strong>, your AI astrologer from Knowlzastro!</p>
                     <p>I'm your expert astrological consultant with 200 years of expertise.</p>
                     <p>Your profile has been created. Now you can ask me anything about astrology!</p>
                     <p>What would you like to know?</p>
@@ -2602,7 +2612,12 @@
             hasPaid: false,
             questionCount: 0,
             paymentCredits: 0, // Track how many questions can be asked with current payment
-            totalPaid: 0 // Track total amount paid
+            totalPaid: 0, // Track total amount paid
+            walletBalance: 0, // Track wallet balance in rupees
+            email: null, // Email for chat sequence
+            mobile: null, // Mobile for chat sequence
+            isLoggedIn: false, // Track login status
+            emailRegistered: false // Track if email is registered
         };
         
         // Make sessionMemory globally accessible for generateIntelligentResponse
@@ -2614,6 +2629,7 @@
         const MINIMUM_DEPOSIT = 50; // Rs 50 minimum deposit (covers 2 questions)
         const QUESTIONS_PER_DEPOSIT = 2; // 2 questions per Rs 50 deposit (₹21 × 2 = ₹42, deposit is ₹50)
         const EMAIL_CHECK_WINDOW = 2 * 60 * 1000; // 2 minutes in milliseconds
+        const MINIMUM_BALANCE_FOR_QUESTION = 21; // Minimum balance required to ask a question (₹21)
         
         // Helper function to check if email exists in last 2 minutes
         function checkEmailInRecentData(email) {
@@ -2791,7 +2807,7 @@
             welcomeDiv.innerHTML = `
                 <div class="message-avatar">⚫</div>
                 <div class="message-content">
-                    <p>Namaste! 🙏 I'm <strong>Bhagyawani</strong>, your AI astrologer from Knowlzastro!</p>
+                    <p>Namaste! 🙏 I'm <strong>Bhagywani</strong>, your AI astrologer from Knowlzastro!</p>
                     <p>I'm your expert astrological consultant with 200 years of expertise.</p>
                     <p>You can ask me anything about astrology. What would you like to know?</p>
                     ${!currentUser ? '<p style="margin-top: 0.5rem; font-size: 0.85rem; color: #94a3b8;"><em>💡 Tip: Login to save your profile and access advanced features.</em></p>' : ''}
@@ -3399,9 +3415,46 @@
                 return;
             }
 
-            // STEP 1: Check if profile is created (birth details + email exist)
+            // STEP 1: CHAT SEQUENCE - Check if logged in with Mobile OTP
             const currentSessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
-            if (!currentSessionMemory.dateOfBirth || !currentSessionMemory.timeOfBirth || !currentSessionMemory.placeOfBirth || !currentSessionMemory.email) {
+            if (!currentSessionMemory.isLoggedIn || !currentSessionMemory.mobile) {
+                // Not logged in - show login prompt
+                addMessage(message, 'user');
+                chatInput.value = '';
+                
+                const loginPrompt = `
+                    <div class="message-content">
+                        <p><strong>🔐 Login Required</strong></p>
+                        <p>Please login with your mobile number using OTP to start your consultation.</p>
+                        <button onclick="openLoginModal()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">📱 Login with Mobile OTP</button>
+                    </div>
+                `;
+                addMessage(loginPrompt, 'ai');
+                return;
+            }
+
+            // STEP 2: CHAT SEQUENCE - Check if email is registered
+            if (!currentSessionMemory.emailRegistered || !currentSessionMemory.email) {
+                // Email not registered - show email registration prompt
+                addMessage(message, 'user');
+                chatInput.value = '';
+                
+                const emailPrompt = `
+                    <div class="message-content">
+                        <p><strong>📧 Email Registration Required</strong></p>
+                        <p>Please register your email address to continue.</p>
+                        <div style="margin-top: 1rem;">
+                            <input type="email" id="register-email-input" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(107, 70, 193, 0.5); border-radius: 8px; color: #e2e8f0; font-size: 1rem; margin-bottom: 0.5rem;">
+                            <button onclick="registerEmailFromChat()" style="width: 100%; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">📧 Register Email</button>
+                        </div>
+                    </div>
+                `;
+                addMessage(emailPrompt, 'ai');
+                return;
+            }
+
+            // STEP 3: Check if profile is created (birth details exist)
+            if (!currentSessionMemory.dateOfBirth || !currentSessionMemory.timeOfBirth || !currentSessionMemory.placeOfBirth) {
                 // Profile not created - show profile creation prompt
                 addMessage(message, 'user');
                 chatInput.value = '';
@@ -3409,14 +3462,12 @@
                 const profilePrompt = `
                     <div class="message-content">
                         <p><strong>📋 Profile Creation Required</strong></p>
-                        <p>Before I can answer your questions, I need your birth details and contact information to create your astrological profile.</p>
+                        <p>Before I can answer your questions, I need your birth details to create your astrological profile.</p>
                         <p>Please provide:</p>
                         <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                             <li><strong>Date of Birth</strong> (e.g., 15-01-1990)</li>
                             <li><strong>Time of Birth</strong> (e.g., 10:30 AM)</li>
                             <li><strong>Place of Birth</strong> (e.g., Mumbai, India)</li>
-                            <li><strong>Email Address</strong></li>
-                            <li><strong>Mobile Number</strong></li>
                         </ul>
                         <button onclick="showProfileInChat()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✨ Create Profile Now</button>
                     </div>
@@ -3425,44 +3476,30 @@
                 return;
             }
 
-            // STEP 2: Check if email exists in last 2 minutes and determine if first question is free
+            // STEP 4: WALLET BALANCE CHECK - Check if user can ask question
             const userEmail = currentSessionMemory.email;
             const questionCount = currentSessionMemory.questionCount || 0;
-            const paymentCredits = currentSessionMemory.paymentCredits || 0;
-            const emailExistsInRecent = checkEmailInRecentData(userEmail);
+            const walletBalance = currentSessionMemory.walletBalance || 0;
             const isFirstQuestion = questionCount === 0;
             
-            // Determine if first question should be free
-            // Free if: (first question AND email NOT in last 2 minutes)
-            const isFirstQuestionFree = isFirstQuestion && !emailExistsInRecent;
+            // Allow question if: (first question) OR (wallet balance >= ₹21)
+            const canAskQuestion = isFirstQuestion || walletBalance >= MINIMUM_BALANCE_FOR_QUESTION;
             
-            // STEP 3: FIXED - Check payment requirement
-            // Need payment if: (email exists in recent) OR (first question already asked AND no credits left)
-            // Allow asking if: (first question free) OR (has payment credits > 0)
-            if (!isFirstQuestionFree && (emailExistsInRecent || (!isFirstQuestion && paymentCredits <= 0))) {
-                // Need payment - ask for ₹50
+            if (!canAskQuestion) {
+                // Insufficient balance - ask to recharge
                 addMessage(message, 'user');
                 chatInput.value = '';
                 
-                let paymentReason = '';
-                if (emailExistsInRecent) {
-                    paymentReason = 'We found your email in our recent records.';
-                } else if (!isFirstQuestion && paymentCredits <= 0) {
-                    paymentReason = 'You\'ve already asked your first question and used all your credits.';
-                } else {
-                    paymentReason = 'You\'ve used all your question credits.';
-                }
-                
-                const paymentPrompt = `
+                const rechargePrompt = `
                     <div class="message-content">
-                        <p><strong>💳 Payment Required</strong></p>
-                        <p>${paymentReason} To continue asking questions, please make a minimum deposit of ₹${MINIMUM_DEPOSIT}.</p>
+                        <p><strong>💰 Insufficient Wallet Balance</strong></p>
+                        <p>Your current wallet balance is <strong>₹${walletBalance.toFixed(2)}</strong>.</p>
+                        <p>You need at least <strong>₹${MINIMUM_BALANCE_FOR_QUESTION}</strong> to ask a question.</p>
                         <p><strong>Pricing:</strong> ₹${PER_QUESTION_TOTAL} per question (₹${PER_QUESTION_PRICE} + ₹${PER_QUESTION_TOTAL - PER_QUESTION_PRICE} GST)</p>
-                        <p><strong>Minimum Deposit:</strong> ₹${MINIMUM_DEPOSIT} (covers ${QUESTIONS_PER_DEPOSIT} questions)</p>
-                        <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Pay ₹${MINIMUM_DEPOSIT} (${QUESTIONS_PER_DEPOSIT} Questions)</button>
+                        <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Recharge Wallet</button>
                     </div>
                 `;
-                addMessage(paymentPrompt, 'ai');
+                addMessage(rechargePrompt, 'ai');
                 return;
             }
 
@@ -3472,20 +3509,9 @@
             sendBtn.disabled = true;
             sendBtn.textContent = 'Sending...';
             
-            // Show typing indicator with user-friendly message
-            let typingMessageId = 'typing-indicator-' + Date.now();
-            const loadingMessages = [
-                '🔮 Bhagywani is analysing your chart...',
-                '⭐ Bhagywani is analysing planet positions...',
-                '✨ Bhagywani is consulting the cosmos...',
-                '🌟 Bhagywani is interpreting planetary influences...'
-            ];
-            const randomLoadingMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
-            addTypingIndicator(randomLoadingMessage, typingMessageId);
-            
             // Update question count and user activity BEFORE processing
-            if (isFirstQuestionFree) {
-                // First question is FREE (new email, not in last 2 minutes)
+            if (isFirstQuestion) {
+                // First question is FREE (zero balance allowed)
                 currentSessionMemory.questionCount = 1;
                 currentSessionMemory.firstQuestionFree = true;
                 updateUserActivity(userEmail, currentSessionMemory.mobile);
@@ -3495,8 +3521,8 @@
                     window.sessionMemory.firstQuestionFree = true;
                 }
             } else {
-                // FIXED: Subsequent questions require payment credits
-                // Update question count but DON'T deduct credits yet - deduct after response
+                // Subsequent questions require wallet balance >= ₹21
+                // Update question count but DON'T deduct from wallet yet - deduct after response
                 currentSessionMemory.questionCount = questionCount + 1;
                 updateUserActivity(userEmail, currentSessionMemory.mobile);
                 localStorage.setItem('session_memory', JSON.stringify(currentSessionMemory));
@@ -3504,7 +3530,7 @@
                 if (window.sessionMemory) {
                     window.sessionMemory.questionCount = currentSessionMemory.questionCount;
                 }
-                // Note: paymentCredits will be deducted AFTER response is successfully generated
+                // Note: wallet balance will be deducted AFTER response is successfully generated
             }
 
             try {
@@ -3876,11 +3902,6 @@
                     }
                 }
                 
-                // Remove typing indicator before showing response
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
-                
                 // Ensure response is properly formatted
                 if (typeof response === 'string' && !response.includes('<p>')) {
                     response = '<p>' + response.replace(/\n/g, '</p><p>') + '</p>';
@@ -4037,69 +4058,66 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
                     }, 2000);
                 }
                 
-                // STEP 5: FIXED - Deduct payment credit AFTER successful response and check if payment is needed
+                // STEP 5: WALLET BALANCE - Deduct from wallet AFTER successful response
                 const updatedSessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
                 const questionCountAfter = updatedSessionMemory.questionCount || 0;
-                let paymentCreditsAfter = updatedSessionMemory.paymentCredits || 0;
-                const wasFirstQuestionFree = updatedSessionMemory.firstQuestionFree === true;
+                let walletBalanceAfter = updatedSessionMemory.walletBalance || 0;
+                const isFirstQuestionAndFree = (questionCountAfter === 1 && updatedSessionMemory.firstQuestionFree === true);
                 
-                // FIXED: Deduct credit for any question AFTER the first one (regardless of whether first was free)
-                // Only skip deduction for the very first question if it was free
-                const isFirstQuestionAndFree = (questionCountAfter === 1 && wasFirstQuestionFree);
-                
-                if (!isFirstQuestionAndFree && paymentCreditsAfter > 0) {
-                    paymentCreditsAfter = paymentCreditsAfter - 1;
-                    updatedSessionMemory.paymentCredits = paymentCreditsAfter;
+                // Deduct ₹21 from wallet for any question AFTER the first one (first question is free)
+                if (!isFirstQuestionAndFree && walletBalanceAfter >= MINIMUM_BALANCE_FOR_QUESTION) {
+                    walletBalanceAfter = walletBalanceAfter - PER_QUESTION_TOTAL;
+                    updatedSessionMemory.walletBalance = walletBalanceAfter;
                     localStorage.setItem('session_memory', JSON.stringify(updatedSessionMemory));
                     if (window.sessionMemory) {
-                        window.sessionMemory.paymentCredits = paymentCreditsAfter;
+                        window.sessionMemory.walletBalance = walletBalanceAfter;
                     }
-                    console.log('✅ Payment credit deducted. Remaining credits:', paymentCreditsAfter);
+                    console.log('✅ ₹' + PER_QUESTION_TOTAL + ' deducted from wallet. Remaining balance: ₹' + walletBalanceAfter.toFixed(2));
                 }
                 
-                // After first FREE question, ask for minimum deposit
-                if (questionCountAfter === 1 && wasFirstQuestionFree && paymentCreditsAfter === 0) {
+                // After first FREE question, ask for recharge if balance is low
+                if (questionCountAfter === 1 && isFirstQuestionAndFree && walletBalanceAfter < MINIMUM_BALANCE_FOR_QUESTION) {
                     setTimeout(() => {
                         const paymentPrompt = `
                             <div class="message-content">
-                                <p><strong>💳 Payment Required</strong></p>
+                                <p><strong>💳 Recharge Required</strong></p>
                                 <p>Thank you for your first question! That was <strong>FREE</strong>. 🎉</p>
-                                <p>To continue asking questions, please make a <strong>minimum deposit of ₹${MINIMUM_DEPOSIT}</strong>.</p>
+                                <p>To continue asking questions, please recharge your wallet with at least <strong>₹${MINIMUM_BALANCE_FOR_QUESTION}</strong>.</p>
                                 <p><strong>Pricing:</strong> ₹${PER_QUESTION_TOTAL} per question (₹${PER_QUESTION_PRICE} + ₹${PER_QUESTION_TOTAL - PER_QUESTION_PRICE} GST)</p>
-                                <p><strong>Your Deposit:</strong> ₹${MINIMUM_DEPOSIT} covers ${QUESTIONS_PER_DEPOSIT} questions</p>
-                                <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Pay ₹${MINIMUM_DEPOSIT} (${QUESTIONS_PER_DEPOSIT} Questions)</button>
+                                <p><strong>Minimum Recharge:</strong> ₹${MINIMUM_DEPOSIT} (recommended for ${QUESTIONS_PER_DEPOSIT} questions)</p>
+                                <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Recharge Wallet</button>
                             </div>
                         `;
                         addMessage(paymentPrompt, 'ai');
                     }, 500);
                 }
-                // After credits are exhausted, ask for another minimum deposit
-                else if (questionCountAfter > 1 && paymentCreditsAfter === 0) {
+                // After wallet balance is low, ask for recharge
+                else if (questionCountAfter > 1 && walletBalanceAfter < MINIMUM_BALANCE_FOR_QUESTION) {
                     setTimeout(() => {
                         const paymentPrompt = `
                             <div class="message-content">
-                                <p><strong>💳 Additional Payment Required</strong></p>
-                                <p>You've used all your question credits. To continue, please make another <strong>minimum deposit of ₹${MINIMUM_DEPOSIT}</strong>.</p>
+                                <p><strong>💰 Low Wallet Balance</strong></p>
+                                <p>Your wallet balance is <strong>₹${walletBalanceAfter.toFixed(2)}</strong>. You need at least <strong>₹${MINIMUM_BALANCE_FOR_QUESTION}</strong> to ask another question.</p>
                                 <p><strong>Pricing:</strong> ₹${PER_QUESTION_TOTAL} per question (₹${PER_QUESTION_PRICE} + ₹${PER_QUESTION_TOTAL - PER_QUESTION_PRICE} GST)</p>
-                                <p><strong>Your Deposit:</strong> ₹${MINIMUM_DEPOSIT} covers ${QUESTIONS_PER_DEPOSIT} questions</p>
-                                <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Pay ₹${MINIMUM_DEPOSIT} (${QUESTIONS_PER_DEPOSIT} Questions)</button>
+                                <button onclick="showPaymentModalForQuestions()" style="margin-top: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">💳 Recharge Wallet</button>
                             </div>
                         `;
                         addMessage(paymentPrompt, 'ai');
                     }, 500);
+                }
+                
+                // STEP 6: Generate Complete Remedies Report after 3 questions
+                if (questionCountAfter >= 3 && !updatedSessionMemory.remediesReportGenerated) {
+                    setTimeout(() => {
+                        generateCompleteRemediesReport();
+                        updatedSessionMemory.remediesReportGenerated = true;
+                        localStorage.setItem('session_memory', JSON.stringify(updatedSessionMemory));
+                    }, 2000);
                 }
             } catch (error) {
                 console.error('❌ Chat error:', error);
-                // Remove typing indicator on error
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
                 addMessage('<p><strong>Error:</strong> Failed to get response. Please try again.</p>', 'ai');
             } finally {
-                // Ensure typing indicator is removed
-                if (typeof typingMessageId !== 'undefined') {
-                    removeTypingIndicator(typingMessageId);
-                }
                 sendBtn.textContent = 'Send';
                 sendBtn.disabled = chatInput.value.trim() === '';
                 if (chatInput) chatInput.focus();
@@ -4144,56 +4162,6 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             console.log('✅ Message added to chat');
-        }
-        
-        // Add typing indicator function
-        function addTypingIndicator(message, messageId) {
-            const chatMessages = document.getElementById('chat-messages');
-            if (!chatMessages) return null;
-            
-            const typingDiv = document.createElement('div');
-            typingDiv.id = messageId;
-            typingDiv.className = 'message ai-message typing-indicator';
-            typingDiv.innerHTML = `
-                <div class="message-avatar">
-                    <span class="chakra-icon">⚫</span>
-                </div>
-                <div class="message-content">
-                    <p style="color: #d4af37; font-style: italic;">${message}</p>
-                    <div class="typing-dots" style="display: inline-flex; gap: 4px; margin-left: 8px;">
-                        <span style="animation: typing 1.4s infinite;">.</span>
-                        <span style="animation: typing 1.4s infinite 0.2s;">.</span>
-                        <span style="animation: typing 1.4s infinite 0.4s;">.</span>
-                    </div>
-                </div>
-            `;
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            return typingDiv;
-        }
-        
-        // Remove typing indicator
-        function removeTypingIndicator(messageId) {
-            const typingDiv = document.getElementById(messageId);
-            if (typingDiv) {
-                typingDiv.remove();
-            }
-        }
-        
-        // Add CSS for typing animation
-        if (!document.getElementById('typing-indicator-style')) {
-            const style = document.createElement('style');
-            style.id = 'typing-indicator-style';
-            style.textContent = `
-                @keyframes typing {
-                    0%, 60%, 100% { opacity: 0.3; }
-                    30% { opacity: 1; }
-                }
-                .typing-indicator {
-                    opacity: 0.9;
-                }
-            `;
-            document.head.appendChild(style);
         }
         
         // Make addMessage globally accessible
@@ -5659,29 +5627,33 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             paymentModal.classList.remove('active');
             paymentModal.style.display = 'none';
             
-            // FIXED: Update session memory with flexible payment
+            // FIXED: Update session memory with wallet balance (not payment credits)
             const currentSessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
             currentSessionMemory.hasPaid = true;
-            currentSessionMemory.paymentCredits = (currentSessionMemory.paymentCredits || 0) + questionsFromDeposit;
+            // Add to wallet balance instead of payment credits
+            currentSessionMemory.walletBalance = (currentSessionMemory.walletBalance || 0) + depositAmount;
             currentSessionMemory.totalPaid = (currentSessionMemory.totalPaid || 0) + depositAmount;
+            
+            // Calculate how many questions can be asked with current balance
+            const questionsFromBalance = Math.floor(currentSessionMemory.walletBalance / PER_QUESTION_TOTAL);
             
             // Update global sessionMemory
             if (window.sessionMemory) {
                 window.sessionMemory.hasPaid = true;
-                window.sessionMemory.paymentCredits = currentSessionMemory.paymentCredits;
+                window.sessionMemory.walletBalance = currentSessionMemory.walletBalance;
                 window.sessionMemory.totalPaid = currentSessionMemory.totalPaid;
             }
             
             localStorage.setItem('session_memory', JSON.stringify(currentSessionMemory));
             
-            // FIXED: Show success message with actual deposit amount
-            const response = '<p><strong>✅ Payment Successful!</strong></p>' +
-                           '<p>You now have <strong>' + currentSessionMemory.paymentCredits + ' question credits</strong> available.</p>' +
-                           '<p><strong>Amount Paid:</strong> ₹' + depositAmount + (depositAmount === MINIMUM_DEPOSIT ? ' (Minimum Deposit)' : '') + '</p>' +
-                           '<p><strong>Questions Added:</strong> ' + questionsFromDeposit + ' question' + (questionsFromDeposit > 1 ? 's' : '') + '</p>' +
-                           '<p><strong>Total Paid:</strong> ₹' + currentSessionMemory.totalPaid + '</p>' +
+            // FIXED: Show success message with wallet balance
+            const response = '<p><strong>✅ Wallet Recharged Successfully!</strong></p>' +
+                           '<p>Your wallet balance is now <strong>₹' + currentSessionMemory.walletBalance.toFixed(2) + '</strong>.</p>' +
+                           '<p><strong>Amount Added:</strong> ₹' + depositAmount + (depositAmount === MINIMUM_DEPOSIT ? ' (Minimum Deposit)' : '') + '</p>' +
+                           '<p><strong>Questions Available:</strong> ' + questionsFromBalance + ' question' + (questionsFromBalance > 1 ? 's' : '') + ' (₹' + PER_QUESTION_TOTAL + ' per question)</p>' +
+                           '<p><strong>Total Paid:</strong> ₹' + currentSessionMemory.totalPaid.toFixed(2) + '</p>' +
                            '<p><strong>Pricing:</strong> ₹' + PER_QUESTION_TOTAL + ' per question (₹' + PER_QUESTION_PRICE + ' + ₹' + (PER_QUESTION_TOTAL - PER_QUESTION_PRICE) + ' GST)</p>' +
-                           '<p>You can now ask <strong>' + currentSessionMemory.paymentCredits + ' more question' + (currentSessionMemory.paymentCredits > 1 ? 's' : '') + '</strong>.</p>';
+                           '<p>You can now ask <strong>' + questionsFromBalance + ' question' + (questionsFromBalance > 1 ? 's' : '') + '</strong> with your current balance.</p>';
             addMessage(response, 'ai');
             
             // Reset payment method selection
@@ -6040,7 +6012,12 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             }
             
             try {
-                const response = await fetch('http://localhost:4000/api/health');
+                const healthUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.healthCheck) 
+                    ? API_CONFIG.healthCheck 
+                    : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                        ? 'http://localhost:4000/api/health'
+                        : 'https://api.knowlzastro.com/api/health');
+                const response = await fetch(healthUrl);
                 if (response.ok) {
                     return { available: true, message: 'Vedic API connected' };
                 }
@@ -7284,6 +7261,20 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
                         };
                         localStorage.setItem('current_user', JSON.stringify(currentUser));
                         
+                        // Update session memory with login status
+                        const sessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
+                        sessionMemory.isLoggedIn = true;
+                        sessionMemory.mobile = currentChatLoginType === 'mobile' ? contact : (sessionMemory.mobile || null);
+                        sessionMemory.email = currentChatLoginType === 'email' ? contact : (sessionMemory.email || null);
+                        sessionMemory.emailRegistered = currentChatLoginType === 'email';
+                        localStorage.setItem('session_memory', JSON.stringify(sessionMemory));
+                        if (window.sessionMemory) {
+                            window.sessionMemory.isLoggedIn = true;
+                            window.sessionMemory.mobile = sessionMemory.mobile;
+                            window.sessionMemory.email = sessionMemory.email;
+                            window.sessionMemory.emailRegistered = sessionMemory.emailRegistered;
+                        }
+                        
                         // Clear OTP
                         localStorage.removeItem(window.currentOtpKey);
                         delete window.currentOtpKey;
@@ -7368,6 +7359,170 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             }
             if (chatMessages) chatMessages.style.display = 'flex';
         }
+        
+        // Register email from chat
+        window.registerEmailFromChat = function() {
+            const emailInput = document.getElementById('register-email-input');
+            if (!emailInput) {
+                alert('Email input not found');
+                return;
+            }
+            
+            const email = emailInput.value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Update session memory
+            const sessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
+            sessionMemory.email = email;
+            sessionMemory.emailRegistered = true;
+            localStorage.setItem('session_memory', JSON.stringify(sessionMemory));
+            if (window.sessionMemory) {
+                window.sessionMemory.email = email;
+                window.sessionMemory.emailRegistered = true;
+            }
+            
+            // Update currentUser if exists
+            if (currentUser) {
+                currentUser.email = email;
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
+            }
+            
+            // Remove email prompt and show success
+            const chatMessages = document.getElementById('chat-messages');
+            if (chatMessages) {
+                const emailPrompts = chatMessages.querySelectorAll('.message-content');
+                emailPrompts.forEach(msg => {
+                    if (msg.innerHTML.includes('Email Registration Required')) {
+                        msg.closest('.message')?.remove();
+                    }
+                });
+                
+                const successMsg = document.createElement('div');
+                successMsg.className = 'message ai-message';
+                successMsg.innerHTML = `
+                    <div class="message-avatar">✅</div>
+                    <div class="message-content">
+                        <p><strong>Email Registered Successfully!</strong></p>
+                        <p>Your email <strong>${email}</strong> has been registered. You can now proceed with your consultation.</p>
+                    </div>
+                `;
+                chatMessages.appendChild(successMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        };
+        
+        // Generate Complete Remedies Report
+        function generateCompleteRemediesReport() {
+            try {
+                const sessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
+                const chartData = sessionMemory.chartData;
+                const questions = sessionMemory.questions || [];
+                
+                let remediesReport = '<p><strong>🔮 COMPLETE REMEDIES REPORT</strong></p>';
+                remediesReport += '<p>Based on your consultation and birth chart analysis, here are comprehensive remedies:</p>';
+                
+                if (chartData) {
+                    remediesReport += '<div style="background: linear-gradient(135deg, rgba(107, 70, 193, 0.15) 0%, rgba(212, 175, 55, 0.15) 100%); border: 2px solid #d4af37; padding: 1.5rem; margin: 1rem 0; border-radius: 12px;">';
+                    remediesReport += '<h3 style="color: #d4af37; margin-bottom: 1rem;">Personalized Remedies</h3>';
+                    
+                    // Add remedies based on chart analysis
+                    remediesReport += '<ul style="list-style: none; padding: 0;">';
+                    remediesReport += '<li style="margin: 0.5rem 0;">📿 <strong>Mantras:</strong> Chant specific mantras daily for planetary strength</li>';
+                    remediesReport += '<li style="margin: 0.5rem 0;">💎 <strong>Gemstones:</strong> Wear recommended gemstones based on your chart</li>';
+                    remediesReport += '<li style="margin: 0.5rem 0;">🕉️ <strong>Puja & Rituals:</strong> Perform specific deity worship</li>';
+                    remediesReport += '<li style="margin: 0.5rem 0;">🙏 <strong>Charity:</strong> Donations for planetary appeasement</li>';
+                    remediesReport += '<li style="margin: 0.5rem 0;">🧘 <strong>Meditation:</strong> Regular meditation practice</li>';
+                    remediesReport += '<li style="margin: 0.5rem 0;">🌿 <strong>Lifestyle:</strong> Follow recommended lifestyle changes</li>';
+                    remediesReport += '</ul>';
+                    
+                    remediesReport += '</div>';
+                }
+                
+                remediesReport += '<p style="margin-top: 1rem;"><strong>Note:</strong> These remedies are suggestions based on astrological analysis. Follow practices that align with your beliefs.</p>';
+                
+                // Add to chat
+                const chatMessages = document.getElementById('chat-messages');
+                if (chatMessages) {
+                    const remediesDiv = document.createElement('div');
+                    remediesDiv.className = 'message ai-message';
+                    remediesDiv.innerHTML = `
+                        <div class="message-avatar">⚫</div>
+                        <div class="message-content">
+                            ${remediesReport}
+                            <button onclick="downloadRemediesReport()" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%); color: #000; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">📥 Download Remedies Report</button>
+                        </div>
+                    `;
+                    chatMessages.appendChild(remediesDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+                
+                // Store in session memory
+                sessionMemory.completeRemediesReport = remediesReport;
+                localStorage.setItem('session_memory', JSON.stringify(sessionMemory));
+            } catch (error) {
+                console.error('Error generating remedies report:', error);
+            }
+        }
+        
+        // Download Remedies Report
+        window.downloadRemediesReport = function() {
+            try {
+                const sessionMemory = JSON.parse(localStorage.getItem('session_memory') || '{}');
+                const remediesReport = sessionMemory.completeRemediesReport || 'Remedies report not available.';
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const margin = 15;
+                let yPos = margin;
+                
+                // Header
+                doc.setFillColor(212, 175, 55);
+                doc.rect(0, 0, pageWidth, 35, 'F');
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(18);
+                doc.setFont(undefined, 'bold');
+                doc.text('COMPLETE REMEDIES REPORT', pageWidth / 2, 22, { align: 'center' });
+                
+                yPos = 45;
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(0, 0, 0);
+                
+                // Remove HTML tags for PDF
+                const cleanReport = remediesReport.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+                const reportLines = doc.splitTextToSize(cleanReport, pageWidth - (margin * 2));
+                
+                reportLines.forEach(line => {
+                    if (yPos > pageHeight - 30) {
+                        doc.addPage();
+                        yPos = margin;
+                    }
+                    doc.text(line, margin, yPos);
+                    yPos += 5;
+                });
+                
+                // Footer
+                const totalPages = doc.internal.pages.length - 1;
+                for (let i = 1; i <= totalPages; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(7);
+                    doc.setTextColor(150, 150, 150);
+                    doc.setFont(undefined, 'italic');
+                    doc.text('Generated by: Knowlzastro - Bhagywani AI Astrology Consultant', 
+                            pageWidth / 2, pageHeight - 5, { align: 'center' });
+                }
+                
+                doc.save('Complete_Remedies_Report_' + new Date().getTime() + '.pdf');
+            } catch (error) {
+                console.error('Error generating remedies report PDF:', error);
+                alert('Error generating report. Please try again.');
+            }
+        };
         
         // Initialize chat UI on page load - FINAL VERSION (ALL FEATURES)
         document.addEventListener('DOMContentLoaded', function() {
@@ -7539,8 +7694,12 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
                     if (isHealthy) {
                         console.log('✅ Backend API is healthy and ready');
                     } else {
-                        console.warn('⚠️ Backend API is not available. Some features may not work.');
-                        console.warn('   Make sure the backend server is running on http://localhost:4000');
+                        console.warn('⚠️ Backend API is not available. Using fallback features (Gemini AI).');
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.warn('   For local development: Make sure the backend server is running on http://localhost:4000');
+                        } else {
+                            console.warn('   For production: Update API_CONFIG.baseURL in js/config.js with your backend URL');
+                        }
                     }
                 });
             } else {
@@ -8190,19 +8349,39 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
         window.switchLoginTab = function(type) {
             const mobileTab = document.getElementById('login-tab-mobile');
             const emailTab = document.getElementById('login-tab-email');
-            const mobileInput = document.getElementById('login-mobile-input');
-            const emailInput = document.getElementById('login-email-input');
+            const mobileInputDiv = document.getElementById('login-mobile-input');
+            const emailInputDiv = document.getElementById('login-email-input');
             
             if (type === 'mobile') {
-                if (mobileTab) mobileTab.classList.add('active');
-                if (emailTab) emailTab.classList.remove('active');
-                if (mobileInput) mobileInput.style.display = 'block';
-                if (emailInput) emailInput.style.display = 'none';
+                if (mobileTab) {
+                    mobileTab.classList.add('active');
+                    mobileTab.style.background = 'rgba(107, 70, 193, 0.3)';
+                    mobileTab.style.border = '1px solid rgba(107, 70, 193, 0.5)';
+                    mobileTab.style.color = '#e2e8f0';
+                }
+                if (emailTab) {
+                    emailTab.classList.remove('active');
+                    emailTab.style.background = 'rgba(107, 70, 193, 0.1)';
+                    emailTab.style.border = '1px solid rgba(107, 70, 193, 0.3)';
+                    emailTab.style.color = '#94a3b8';
+                }
+                if (mobileInputDiv) mobileInputDiv.style.display = 'block';
+                if (emailInputDiv) emailInputDiv.style.display = 'none';
             } else {
-                if (mobileTab) mobileTab.classList.remove('active');
-                if (emailTab) emailTab.classList.add('active');
-                if (mobileInput) mobileInput.style.display = 'none';
-                if (emailInput) emailInput.style.display = 'block';
+                if (mobileTab) {
+                    mobileTab.classList.remove('active');
+                    mobileTab.style.background = 'rgba(107, 70, 193, 0.1)';
+                    mobileTab.style.border = '1px solid rgba(107, 70, 193, 0.3)';
+                    mobileTab.style.color = '#94a3b8';
+                }
+                if (emailTab) {
+                    emailTab.classList.add('active');
+                    emailTab.style.background = 'rgba(107, 70, 193, 0.3)';
+                    emailTab.style.border = '1px solid rgba(107, 70, 193, 0.5)';
+                    emailTab.style.color = '#e2e8f0';
+                }
+                if (mobileInputDiv) mobileInputDiv.style.display = 'none';
+                if (emailInputDiv) emailInputDiv.style.display = 'block';
             }
         };
         
@@ -8291,6 +8470,21 @@ Format using Markdown with clear sections. Make it comprehensive, detailed, and 
             document.getElementById('login-otp').value = '';
         };
         
+    </script>
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw-desktop.js')
+                    .then(registration => {
+                        console.log('✅ Knowlzastro - Service Worker registered:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('⚠️ Service Worker registration failed:', error);
+                    });
+            });
+        }
     </script>
 
 </body>

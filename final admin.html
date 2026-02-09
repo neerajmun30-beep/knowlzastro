@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowlzastro - Final Admin Dashboard (All Features)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f1419;
+            color: #e2e8f0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #131827;
+            border-right: 1px solid rgba(107, 70, 193, 0.3);
+            padding: 2rem 0;
+        }
+        .logo {
+            padding: 0 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        .nav-item {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #94a3b8;
+            transition: all 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(107, 70, 193, 0.1);
+            color: #e2e8f0;
+            border-left: 3px solid #d4af37;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .top-bar {
+            background: rgba(19, 24, 39, 0.95);
+            border-bottom: 1px solid rgba(107, 70, 193, 0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-box {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #e2e8f0;
+            outline: none;
+            width: 300px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .role-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .role-owner {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .role-admin {
+            background: rgba(107, 70, 193, 0.2);
+            color: #8b5cf6;
+            border: 1px solid rgba(107, 70, 193, 0.4);
+        }
+        .content-area {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(19, 24, 39, 0.8) 0%, rgba(26, 31, 53, 0.8) 100%);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .stat-card h3 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+        }
+        .table-container {
+            background: rgba(19, 24, 39, 0.8);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th {
+            background: rgba(107, 70, 193, 0.1);
+            color: #d4af37;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+        }
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-right: 0.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+        .btn-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: rgba(19, 24, 39, 0.98);
+            border: 2px solid rgba(107, 70, 193, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(107, 70, 193, 0.5); border-radius: 4px; }
+        .hidden { display: none !important; }
+
+        /* ============================================
+           PROFILE MANAGEMENT SYSTEM
+           ============================================ */
+        .profile-selector {
+            position: absolute;
+            top: 60px;
+            right: 1rem;
+            background: rgba(19, 24, 39, 0.95);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 200px;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .profile-selector.active {
+            display: block;
+        }
+        
+        .profile-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .profile-item:hover {
+            background: rgba(107, 70, 193, 0.1);
+            border-color: rgba(107, 70, 193, 0.3);
+        }
+        
+        .profile-item.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        
+        .profile-item-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 0.25rem;
+        }
+        
+        .profile-item-details {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        
+        .profile-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .badge-free {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .badge-premium {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+        }
+        
+        .add-profile-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .profile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .profile-modal.active {
+            display: flex;
+        }
+        
+        .profile-form-container {
+            background: linear-gradient(135deg, rgba(19, 24, 39, 0.98) 0%, rgba(26, 31, 53, 0.98) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .profile-form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-form-label {
+            display: block;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .profile-form-input {
+            width: 100%;
+            padding: 0.875rem;
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(107, 70, 193, 0.3);
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .profile-form-input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-stat-card {
+            background: rgba(107, 70, 193, 0.1);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .profile-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d4af37;
+        }
+        
+        .profile-stat-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+        
+        .profile-action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .profile-header-btn {
+            background: rgba(107, 70, 193, 0.2);
+            border: 1px solid rgba(107, 70, 193, 0.4);
+            color: #d4af37;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .profile-header-btn:hover {
+            background: rgba(107, 70, 193, 0.4);
+        }
+
+        /* Permission Matrix Styles */
+        .permission-matrix {
+            background: rgba(19, 24, 39, 0.8);
+            border: 1px solid rgba(107, 70, 193, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .permission-grid {
+            display: grid;
+            grid-template-columns: 200px repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .permission-header {
+            font-weight: 600;
+            color: #d4af37;
+            padding: 0.75rem;
+            background: rgba(107, 70, 193, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .permission-row-header {
+            font-weight: 600;
+            color: #e2e8f0;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .permission-checkbox-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 8px;
+        }
+        
+        .permission-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #d4af37;
+        }
+        
+        .permission-checkbox:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .admin-email-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(107, 70, 193, 0.2);
+        }
+        
+        .admin-email-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .admin-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .badge-owner {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        
+        .badge-admin {
+            background: rgba(107, 70, 193, 0.2);
+            color: #8b5cf6;
+            border: 1px solid rgba(107, 70, 193, 0.4);
+        }
+        
+        .permission-summary {
+            background: rgba(107, 70, 193, 0.1);
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .permission-summary h4 {
+            color: #d4af37;
+            margin-bottom: 0.75rem;
+        }
+        
+        .permission-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .permission-tag {
+            padding: 0.4rem 0.8rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">🔮 Knowlzastro Admin</div>
+        <div class="nav-item active" onclick="showSection('users')">
+            <span>👥</span> Users Management
+        </div>
+        <div class="nav-item" onclick="showSection('admins')">
+            <span>🛡️</span> Admin Management
+        </div>
+        <div class="nav-item" onclick="showSection('audit')">
+            <span>📋</span> Audit Log
+        </div>
+        <div class="nav-item" onclick="showSection('visitors')">
+            <span>📊</span> Visitor Data
+        </div>
+        <div class="nav-item" onclick="showSection('settings')">
+            <span>⚙️</span> Settings
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <input type="text" class="search-box" placeholder="Search users...">
+            <div class="user-info">
+                <span class="role-badge role-owner">👑 Owner</span>
+                <span id="current-admin-email">neerajmun26@gmail.com</span>
+                <div id="permission-indicator" style="padding: 0.25rem 0.75rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; font-size: 0.75rem; color: #10b981;">
+                    Full Access
+                </div>
+                <button class="action-btn btn-danger" onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- Users Section -->
+            <div id="users-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <div class="number" id="total-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Users</h3>
+                        <div class="number" id="active-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today's Revenue</h3>
+                        <div class="number" id="today-revenue">₹0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <div class="number" id="total-revenue">₹0</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <button class="action-btn btn-primary" onclick="inviteUser()">+ Invite User</button>
+                    <button class="action-btn btn-success" onclick="exportData()">📊 Export Data</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Last Active</th>
+                                <th>Revenue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table">
+                            <tr><td colspan="7" style="text-align: center; padding: 3rem;">No users yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Visitors Section -->
+            <div id="visitors-section" class="hidden">
+                <h2 style="margin-bottom: 2rem; color: #d4af37;">📊 Visitor Data Management</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Visitors</h3>
+                        <div class="number" id="total-visitors">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Unique Visitors</h3>
+                        <div class="number" id="unique-visitors">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Logged In Users</h3>
+                        <div class="number" id="logged-in-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Profile Created</h3>
+                        <div class="number" id="profiles-created">0</div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="action-btn btn-success" onclick="exportVisitorDataCSV()">📥 Export CSV</button>
+                    <button class="action-btn btn-success" onclick="exportVisitorDataExcel()">📊 Export Excel</button>
+                    <button class="action-btn btn-primary" onclick="refreshVisitorData()">🔄 Refresh</button>
+                    <button class="action-btn btn-danger" onclick="clearVisitorData()">🗑️ Clear Data</button>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="visitor-search" class="search-box" placeholder="Search visitors by ID, email, mobile..." style="width: 100%;" oninput="filterVisitors()">
+                </div>
+                
+                <div class="table-container" style="max-height: 600px; overflow-y: auto;">
+                    <table class="data-table">
+                        <thead style="position: sticky; top: 0; z-index: 10;">
+                            <tr>
+                                <th>Visitor ID</th>
+                                <th>Email/Mobile</th>
+                                <th>First Visit</th>
+                                <th>Last Visit</th>
+                                <th>Total Visits</th>
+                                <th>Logged In</th>
+                                <th>Profile Created</th>
+                                <th>Questions Asked</th>
+                                <th>Payment Made</th>
+                                <th>Device</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitors-table">
+                            <tr><td colspan="11" style="text-align: center; padding: 3rem;">No visitor data yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Settings Section -->
+            <div id="settings-section" class="hidden">
+                <h2 style="margin-bottom: 2rem; color: #d4af37;">Settings</h2>
+                <div class="stat-card" style="margin-bottom: 1rem;">
+                    <h3>Ownership Protection</h3>
+                    <p style="color: #94a3b8; margin-top: 0.5rem;">The owner role (neerajmun26@gmail.com) cannot be transferred without explicit OTP verification.</p>
+                    <button class="action-btn btn-danger" style="margin-top: 1rem;" onclick="requestOwnershipTransfer()">Request Ownership Transfer</button>
+                </div>
+                <div class="stat-card" style="margin-bottom: 1rem;">
+                    <h3>Admin Authorization & Permissions</h3>
+                    <p style="color: #94a3b8; margin-top: 0.5rem; margin-bottom: 1rem;">
+                        Add multiple admin emails and configure their permissions. Owner (neerajmun26@gmail.com) has 100% access.
+                    </p>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <input type="email" id="authorize-email" placeholder="Enter email to authorize as admin" style="width: 70%; padding: 0.75rem; border-radius: 8px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(107, 70, 193, 0.3); color: #e2e8f0; outline: none;">
+                        <button class="action-btn btn-primary" onclick="addAdminEmail()" style="width: 28%; margin-left: 2%;">+ Add Admin</button>
+                    </div>
+                    
+                    <!-- Admin List with Permissions -->
+                    <div id="admin-list-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="stat-card" style="margin-bottom: 1rem;">
+                    <h3>Admin Permissions</h3>
+                    <div style="margin-top: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                            <input type="checkbox" id="can-add-free-users">
+                            <span>Can add free users</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" id="can-manage-admins">
+                            <span>Can manage admins</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite User Modal -->
+    <div id="invite-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #d4af37; margin-bottom: 1rem;">Invite User</h2>
+            <input type="email" id="invite-email" placeholder="Email address" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 8px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(107, 70, 193, 0.3); color: #e2e8f0; outline: none;">
+            <select id="invite-role" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 8px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(107, 70, 193, 0.3); color: #e2e8f0; outline: none;">
+                <option value="free">Free User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <div style="display: flex; gap: 1rem;">
+                <button class="action-btn btn-primary" style="flex: 1;" onclick="sendInvite()">Send Invite</button>
+                <button class="action-btn btn-danger" style="flex: 1;" onclick="closeModal('invite-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'users';
+        let usersData = [];
+        
+        const ownerEmail = 'neerajmun26@gmail.com';
+        
+        function showSection(section) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+            document.querySelectorAll('[id$="-section"]').forEach(el => el.classList.add('hidden'));
+            const targetSection = document.getElementById(section + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+            currentSection = section;
+            
+            // Load visitor data when visitors section is shown
+            if (section === 'visitors') {
+                loadVisitorData();
+            }
+        }
+        
+        function inviteUser() {
+            const currentUserEmail = ownerEmail;
+            
+            if (!canPerformAction(currentUserEmail, 'manage_users')) {
+                alert('❌ Unauthorized! You do not have permission to manage users.');
+                return;
+            }
+
+            document.getElementById('invite-modal').classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function sendInvite() {
+            const email = document.getElementById('invite-email').value;
+            const role = document.getElementById('invite-role').value;
+            
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+            
+            // Add to users table
+            usersData.push({
+                email: email,
+                role: role,
+                status: 'Invited',
+                created: new Date().toLocaleDateString(),
+                lastActive: '-',
+                revenue: '₹0'
+            });
+            
+            updateUsersTable();
+            closeModal('invite-modal');
+            document.getElementById('invite-email').value = '';
+        }
+        
+        function updateUsersTable() {
+            const tbody = document.getElementById('users-table');
+            tbody.innerHTML = '';
+            
+            usersData.forEach((user, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${user.status}</td>
+                    <td>${user.created}</td>
+                    <td>${user.lastActive}</td>
+                    <td>${user.revenue}</td>
+                    <td>
+                        <button class="action-btn btn-primary" onclick="editUser(${idx})">Edit</button>
+                        <button class="action-btn btn-danger" onclick="removeUser(${idx})">Remove</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('total-users').textContent = usersData.length;
+        }
+        
+        function removeUser(idx) {
+            if (confirm('Are you sure you want to remove this user?')) {
+                usersData.splice(idx, 1);
+                updateUsersTable();
+            }
+        }
+        
+        function exportData() {
+            const currentUserEmail = ownerEmail;
+            
+            if (!canPerformAction(currentUserEmail, 'export_data')) {
+                alert('❌ Unauthorized! You do not have permission to export data.');
+                return;
+            }
+            
+            const data = {
+                users: usersData,
+                exportDate: new Date().toISOString(),
+                owner: ownerEmail
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `knowlzastro_users_${new Date().getTime()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // ============================================
+        // VISITOR DATA MANAGEMENT
+        // ============================================
+        
+        let visitorsData = [];
+        
+        function loadVisitorData() {
+            try {
+                const visitorData = JSON.parse(localStorage.getItem('visitor_data') || '[]');
+                const visitLog = JSON.parse(localStorage.getItem('visit_log') || '[]');
+                
+                // Combine and process visitor data
+                visitorsData = visitorData.map(visitor => {
+                    // Find all visits for this visitor
+                    const visits = visitLog.filter(v => v.id === visitor.id);
+                    
+                    return {
+                        ...visitor,
+                        visits: visits.length,
+                        visitDetails: visits
+                    };
+                });
+                
+                // Sort by last visit (most recent first)
+                visitorsData.sort((a, b) => {
+                    const aDate = new Date(a.lastVisit || a.firstVisit || 0);
+                    const bDate = new Date(b.lastVisit || b.firstVisit || 0);
+                    return bDate - aDate;
+                });
+                
+                updateVisitorStats();
+                updateVisitorsTable();
+                
+            } catch (error) {
+                console.error('Error loading visitor data:', error);
+                alert('Error loading visitor data: ' + error.message);
+            }
+        }
+        
+        function updateVisitorStats() {
+            const totalVisitors = visitorsData.length;
+            const uniqueVisitors = new Set(visitorsData.map(v => v.id)).size;
+            const loggedInUsers = visitorsData.filter(v => v.loggedIn).length;
+            const profilesCreated = visitorsData.filter(v => v.profileCreated).length;
+            
+            document.getElementById('total-visitors').textContent = totalVisitors;
+            document.getElementById('unique-visitors').textContent = uniqueVisitors;
+            document.getElementById('logged-in-users').textContent = loggedInUsers;
+            document.getElementById('profiles-created').textContent = profilesCreated;
+        }
+        
+        function updateVisitorsTable() {
+            const tbody = document.getElementById('visitors-table');
+            tbody.innerHTML = '';
+            
+            if (visitorsData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 3rem;">No visitor data yet</td></tr>';
+                return;
+            }
+            
+            visitorsData.forEach(visitor => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-size: 0.85rem; color: #94a3b8;">${visitor.id}</td>
+                    <td>${visitor.email || visitor.mobile || '-'}</td>
+                    <td>${visitor.firstVisitDate || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.firstVisitTime || ''}</span></td>
+                    <td>${visitor.lastVisitDate || visitor.firstVisitDate || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.lastVisitTime || visitor.firstVisitTime || ''}</span></td>
+                    <td>${visitor.totalVisits || 1}</td>
+                    <td><span style="color: ${visitor.loggedIn ? '#10b981' : '#ef4444'}">${visitor.loggedIn ? '✅ Yes' : '❌ No'}</span></td>
+                    <td><span style="color: ${visitor.profileCreated ? '#10b981' : '#ef4444'}">${visitor.profileCreated ? '✅ Yes' : '❌ No'}</span></td>
+                    <td>${visitor.questionsAsked || 0}</td>
+                    <td><span style="color: ${visitor.paymentMade ? '#10b981' : '#ef4444'}">${visitor.paymentMade ? '✅ Yes' : '❌ No'}</span></td>
+                    <td>${visitor.platform || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.viewportWidth || ''}x${visitor.viewportHeight || ''}</span></td>
+                    <td>${visitor.timezone || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function filterVisitors() {
+            const searchTerm = document.getElementById('visitor-search').value.toLowerCase();
+            
+            if (!searchTerm) {
+                updateVisitorsTable();
+                return;
+            }
+            
+            const filtered = visitorsData.filter(v => 
+                v.id.toLowerCase().includes(searchTerm) ||
+                (v.email && v.email.toLowerCase().includes(searchTerm)) ||
+                (v.mobile && v.mobile.toLowerCase().includes(searchTerm)) ||
+                (v.userId && v.userId.toLowerCase().includes(searchTerm))
+            );
+            
+            const tbody = document.getElementById('visitors-table');
+            tbody.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 3rem;">No visitors found</td></tr>';
+                return;
+            }
+            
+            filtered.forEach(visitor => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-size: 0.85rem; color: #94a3b8;">${visitor.id}</td>
+                    <td>${visitor.email || visitor.mobile || '-'}</td>
+                    <td>${visitor.firstVisitDate || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.firstVisitTime || ''}</span></td>
+                    <td>${visitor.lastVisitDate || visitor.firstVisitDate || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.lastVisitTime || visitor.firstVisitTime || ''}</span></td>
+                    <td>${visitor.totalVisits || 1}</td>
+                    <td><span style="color: ${visitor.loggedIn ? '#10b981' : '#ef4444'}">${visitor.loggedIn ? '✅ Yes' : '❌ No'}</span></td>
+                    <td><span style="color: ${visitor.profileCreated ? '#10b981' : '#ef4444'}">${visitor.profileCreated ? '✅ Yes' : '❌ No'}</span></td>
+                    <td>${visitor.questionsAsked || 0}</td>
+                    <td><span style="color: ${visitor.paymentMade ? '#10b981' : '#ef4444'}">${visitor.paymentMade ? '✅ Yes' : '❌ No'}</span></td>
+                    <td>${visitor.platform || '-'}<br><span style="font-size: 0.75rem; color: #94a3b8;">${visitor.viewportWidth || ''}x${visitor.viewportHeight || ''}</span></td>
+                    <td>${visitor.timezone || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function refreshVisitorData() {
+            loadVisitorData();
+            alert('✅ Visitor data refreshed!');
+        }
+        
+        function exportVisitorDataCSV() {
+            if (!canPerformAction(ownerEmail, 'export_data')) {
+                alert('❌ Unauthorized! You do not have permission to export data.');
+                return;
+            }
+            
+            if (visitorsData.length === 0) {
+                alert('No visitor data to export');
+                return;
+            }
+            
+            // CSV Headers
+            const headers = [
+                'Visitor ID',
+                'Email',
+                'Mobile',
+                'User ID',
+                'First Visit Date',
+                'First Visit Time',
+                'Last Visit Date',
+                'Last Visit Time',
+                'Total Visits',
+                'Logged In',
+                'Profile Created',
+                'Questions Asked',
+                'Payment Made',
+                'Platform',
+                'Screen Resolution',
+                'Viewport Size',
+                'Timezone',
+                'Language',
+                'User Agent',
+                'Referrer',
+                'Last Session Duration (seconds)',
+                'Total Session Duration (seconds)'
+            ];
+            
+            // CSV Rows
+            const rows = visitorsData.map(visitor => [
+                visitor.id || '',
+                visitor.email || '',
+                visitor.mobile || '',
+                visitor.userId || '',
+                visitor.firstVisitDate || '',
+                visitor.firstVisitTime || '',
+                visitor.lastVisitDate || '',
+                visitor.lastVisitTime || '',
+                visitor.totalVisits || 0,
+                visitor.loggedIn ? 'Yes' : 'No',
+                visitor.profileCreated ? 'Yes' : 'No',
+                visitor.questionsAsked || 0,
+                visitor.paymentMade ? 'Yes' : 'No',
+                visitor.platform || '',
+                `${visitor.screenWidth || ''}x${visitor.screenHeight || ''}`,
+                `${visitor.viewportWidth || ''}x${visitor.viewportHeight || ''}`,
+                visitor.timezone || '',
+                visitor.language || '',
+                `"${(visitor.userAgent || '').replace(/"/g, '""')}"`,
+                visitor.referrer || '',
+                visitor.lastSessionDuration || 0,
+                visitor.totalSessionDuration || 0
+            ]);
+            
+            // Convert to CSV
+            const csvContent = [
+                headers.join(','),
+                ...rows.map(row => row.join(','))
+            ].join('\n');
+            
+            // Add BOM for Excel compatibility
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `knowlzastro_visitors_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('✅ Visitor data exported to CSV successfully!');
+        }
+        
+        function exportVisitorDataExcel() {
+            if (!canPerformAction(ownerEmail, 'export_data')) {
+                alert('❌ Unauthorized! You do not have permission to export data.');
+                return;
+            }
+            
+            if (visitorsData.length === 0) {
+                alert('No visitor data to export');
+                return;
+            }
+            
+            // Create Excel-compatible TSV (Tab-Separated Values) format
+            // Excel can open TSV files directly
+            
+            // Headers
+            const headers = [
+                'Visitor ID',
+                'Email',
+                'Mobile',
+                'User ID',
+                'First Visit Date',
+                'First Visit Time',
+                'Last Visit Date',
+                'Last Visit Time',
+                'Total Visits',
+                'Logged In',
+                'Profile Created',
+                'Questions Asked',
+                'Payment Made',
+                'Platform',
+                'Screen Resolution',
+                'Viewport Size',
+                'Timezone',
+                'Language',
+                'User Agent',
+                'Referrer',
+                'Last Session Duration (seconds)',
+                'Total Session Duration (seconds)'
+            ];
+            
+            // Rows
+            const rows = visitorsData.map(visitor => [
+                visitor.id || '',
+                visitor.email || '',
+                visitor.mobile || '',
+                visitor.userId || '',
+                visitor.firstVisitDate || '',
+                visitor.firstVisitTime || '',
+                visitor.lastVisitDate || '',
+                visitor.lastVisitTime || '',
+                visitor.totalVisits || 0,
+                visitor.loggedIn ? 'Yes' : 'No',
+                visitor.profileCreated ? 'Yes' : 'No',
+                visitor.questionsAsked || 0,
+                visitor.paymentMade ? 'Yes' : 'No',
+                visitor.platform || '',
+                `${visitor.screenWidth || ''}x${visitor.screenHeight || ''}`,
+                `${visitor.viewportWidth || ''}x${visitor.viewportHeight || ''}`,
+                visitor.timezone || '',
+                visitor.language || '',
+                visitor.userAgent || '',
+                visitor.referrer || '',
+                visitor.lastSessionDuration || 0,
+                visitor.totalSessionDuration || 0
+            ]);
+            
+            // Convert to TSV (Excel format)
+            const tsvContent = [
+                headers.join('\t'),
+                ...rows.map(row => row.join('\t'))
+            ].join('\n');
+            
+            // Add BOM for Excel compatibility
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + tsvContent], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `knowlzastro_visitors_${new Date().toISOString().split('T')[0]}.xls`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('✅ Visitor data exported to Excel successfully!');
+        }
+        
+        function clearVisitorData() {
+            if (!confirm('⚠️ Are you sure you want to clear all visitor data? This action cannot be undone.')) {
+                return;
+            }
+            
+            if (!canPerformAction(ownerEmail, 'export_data')) {
+                alert('❌ Unauthorized! You do not have permission to clear data.');
+                return;
+            }
+            
+            localStorage.removeItem('visitor_data');
+            localStorage.removeItem('visit_log');
+            localStorage.removeItem('page_log');
+            
+            visitorsData = [];
+            updateVisitorStats();
+            updateVisitorsTable();
+            
+            alert('✅ Visitor data cleared successfully!');
+        }
+        
+        // Load visitor data on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (currentSection === 'visitors') {
+                loadVisitorData();
+            }
+        });
+        
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                window.location.href = 'Desktop.html';
+            }
+        }
+
+        // ============================================
+        // PROFILE MANAGEMENT SYSTEM
+        // ============================================
+        
+        const OWNER_EMAIL = 'neerajmun26@gmail.com';
+        const FREE_PROFILES_LIMIT = 2;
+        const MULTI_PROFILE_PRICE = 250;
+        const MULTI_PROFILE_GST = 0.05;
+        const MULTI_PROFILE_TOTAL = MULTI_PROFILE_PRICE + (MULTI_PROFILE_PRICE * MULTI_PROFILE_GST); // ₹262.50
+        
+        let userProfiles = JSON.parse(localStorage.getItem('user_profiles') || '[]');
+        let currentProfileId = localStorage.getItem('current_profile_id') || null;
+        let authorizedAdmins = JSON.parse(localStorage.getItem('authorized_admins') || '[]');
+        
+        // Check if user has admin access
+        function hasAdminAccess(email) {
+            return email === OWNER_EMAIL || authorizedAdmins.includes(email);
+        }
+        
+        // Initialize profiles on load
+        function initializeProfiles() {
+            if (currentUser) {
+                loadUserProfiles();
+                updateProfileSelector();
+            }
+        }
+        
+        function loadUserProfiles() {
+            // Load profiles for current user
+            userProfiles = JSON.parse(localStorage.getItem('user_profiles') || '[]').filter(p => p.userId === currentUser.id);
+            
+            // If no current profile selected, select first one or create default
+            if (!currentProfileId && userProfiles.length > 0) {
+                currentProfileId = userProfiles[0].id;
+                localStorage.setItem('current_profile_id', currentProfileId);
+            }
+        }
+        
+        function toggleProfileSelector() {
+            const selector = document.getElementById('profile-selector');
+            selector.classList.toggle('active');
+        }
+        
+        function updateProfileSelector() {
+            const list = document.getElementById('profiles-list');
+            const countEl = document.getElementById('profile-count');
+            const freeLeftEl = document.getElementById('free-profiles-left');
+            const currentNameEl = document.getElementById('current-profile-name');
+            
+            if (!currentUser) return;
+            
+            const freeProfilesUsed = userProfiles.filter(p => p.isFree).length;
+            const freeProfilesLeft = Math.max(0, FREE_PROFILES_LIMIT - freeProfilesUsed);
+            const hasMultiProfileSubscription = userProfiles.some(p => p.hasMultiProfileSubscription) || 
+                                               (currentUser.multiProfileSubscription && 
+                                                new Date(currentUser.multiProfileSubscription.expiresAt) > new Date());
+            
+            // Admin gets unlimited free
+            const isAdmin = hasAdminAccess(currentUser.email);
+            const canCreateFree = isAdmin || freeProfilesLeft > 0 || hasMultiProfileSubscription;
+            
+            countEl.textContent = userProfiles.length;
+            freeLeftEl.textContent = isAdmin ? '∞' : (canCreateFree ? freeProfilesLeft : '0');
+            
+            // Update current profile name
+            const currentProfile = userProfiles.find(p => p.id === currentProfileId);
+            if (currentProfile) {
+                currentNameEl.textContent = currentProfile.name;
+            } else {
+                currentNameEl.textContent = 'Profile';
+            }
+            
+            // Render profiles list
+            list.innerHTML = '';
+            userProfiles.forEach(profile => {
+                const isActive = profile.id === currentProfileId;
+                const profileItem = document.createElement('div');
+                profileItem.className = `profile-item ${isActive ? 'active' : ''}`;
+                profileItem.onclick = () => switchProfile(profile.id);
+                
+                const badge = profile.isFree ? '<span class="profile-badge badge-free">Free</span>' : 
+                             hasMultiProfileSubscription ? '<span class="profile-badge badge-premium">Premium</span>' : '';
+                
+                profileItem.innerHTML = `
+                    <div class="profile-item-name">
+                        ${profile.name} ${badge}
+                </div>
+                    <div class="profile-item-details">
+                        ${profile.dob || 'No DOB'} • ${profile.relationship || 'Self'}
+                </div>
+            `;
+                list.appendChild(profileItem);
+            });
+            
+            // Show payment info if needed
+            const paymentInfo = document.getElementById('profile-payment-info');
+            if (!canCreateFree() && !hasMultiProfileSubscription) {
+                paymentInfo.style.display = 'block';
+            } else {
+                paymentInfo.style.display = 'none';
+            }
+        }
+        
+        function canCreateFreeProfile() {
+            if (!currentUser) return false;
+            
+            // Check if user has free_access permission
+            if (hasPermission(currentUser.email, 'free_access')) {
+                return true;
+            }
+            
+            const freeProfilesUsed = userProfiles.filter(p => p.isFree).length;
+            const hasMultiProfileSubscription = currentUser.multiProfileSubscription && 
+                                               new Date(currentUser.multiProfileSubscription.expiresAt) > new Date();
+            
+            return freeProfilesUsed < FREE_PROFILES_LIMIT || hasMultiProfileSubscription;
+        }
+        
+        function openProfileModal(profileId = null) {
+            const modal = document.getElementById('profile-modal');
+            const form = modal.querySelector('h2');
+            
+            if (profileId) {
+                // Edit mode
+                const profile = userProfiles.find(p => p.id === profileId);
+                if (profile) {
+                    form.textContent = '✏️ Edit Profile';
+                    document.getElementById('profile-name').value = profile.name;
+                    document.getElementById('profile-dob').value = profile.dob || '';
+                    document.getElementById('profile-tob').value = profile.tob || '';
+                    document.getElementById('profile-pob').value = profile.pob || '';
+                    document.getElementById('profile-gender').value = profile.gender || '';
+                    document.getElementById('profile-relationship').value = profile.relationship || 'self';
+                }
+            } else {
+                // Create mode
+                form.textContent = '✨ Create Profile';
+                document.getElementById('profile-name').value = '';
+                document.getElementById('profile-dob').value = '';
+                document.getElementById('profile-tob').value = '';
+                document.getElementById('profile-pob').value = '';
+                document.getElementById('profile-gender').value = '';
+                document.getElementById('profile-relationship').value = 'self';
+            }
+            
+            modal.dataset.profileId = profileId || '';
+            modal.classList.add('active');
+            updateProfileSelector();
+        }
+        
+        function closeProfileModal() {
+            document.getElementById('profile-modal').classList.remove('active');
+        }
+        
+        function saveProfile() {
+            const profileId = document.getElementById('profile-modal').dataset.profileId;
+            const name = document.getElementById('profile-name').value.trim();
+            const dob = document.getElementById('profile-dob').value;
+            const tob = document.getElementById('profile-tob').value;
+            const pob = document.getElementById('profile-pob').value.trim();
+            const gender = document.getElementById('profile-gender').value;
+            const relationship = document.getElementById('profile-relationship').value;
+            
+            if (!name || !dob || !tob || !pob) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            // Check if creating new profile and if payment needed
+            if (!profileId) {
+                if (!canCreateFreeProfile()) {
+                    alert('You need to subscribe to create more profiles. ₹262.50/month for unlimited profiles.');
+                    subscribeMultipleProfiles();
+                    return;
+                }
+            }
+            
+            const profile = {
+                id: profileId || generateProfileId(),
+                userId: currentUser.id,
+                name: name,
+                dob: dob,
+                tob: tob,
+                pob: pob,
+                gender: gender,
+                relationship: relationship,
+                isFree: !profileId ? !hasMultiProfileSubscription && userProfiles.filter(p => p.isFree).length < FREE_PROFILES_LIMIT : 
+                        userProfiles.find(p => p.id === profileId)?.isFree || false,
+                createdAt: profileId ? userProfiles.find(p => p.id === profileId)?.createdAt : new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            // Save profile
+            const allProfiles = JSON.parse(localStorage.getItem('user_profiles') || '[]');
+            const index = allProfiles.findIndex(p => p.id === profile.id);
+            
+            if (index !== -1) {
+                allProfiles[index] = profile;
+            } else {
+                allProfiles.push(profile);
+            }
+            
+            localStorage.setItem('user_profiles', JSON.stringify(allProfiles));
+            
+            // Reload profiles
+            loadUserProfiles();
+            updateProfileSelector();
+            
+            // Switch to new profile
+            if (!profileId) {
+                switchProfile(profile.id);
+            }
+            
+            closeProfileModal();
+            alert('✅ Profile saved successfully!');
+        }
+        
+        function switchProfile(profileId) {
+            const profile = userProfiles.find(p => p.id === profileId);
+            if (!profile) return;
+            
+            currentProfileId = profileId;
+            localStorage.setItem('current_profile_id', profileId);
+            
+            // Update session memory with profile data
+            sessionMemory.dateOfBirth = profile.dob;
+            sessionMemory.timeOfBirth = profile.tob;
+            sessionMemory.placeOfBirth = profile.pob;
+            sessionMemory.gender = profile.gender;
+            sessionMemory.relationship = profile.relationship;
+            
+            // Update UI
+            updateProfileSelector();
+            document.getElementById('profile-selector').classList.remove('active');
+            
+            // Show confirmation
+            addMessage(`<p><strong>✅ Switched to profile: ${profile.name}</p>`, 'ai');
+        }
+        
+        function subscribeMultipleProfiles() {
+            closeProfileModal();
+            document.getElementById('multi-profile-modal').classList.add('active');
+        }
+        
+        function closeMultiProfileModal() {
+            document.getElementById('multi-profile-modal').classList.remove('active');
+        }
+        
+        function processMultiProfilePayment() {
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Process payment
+            const modal = document.getElementById('multi-profile-modal');
+            modal.classList.remove('active');
+            
+            // Update user subscription
+            if (!currentUser.multiProfileSubscription) {
+                currentUser.multiProfileSubscription = {};
+            }
+            
+            currentUser.multiProfileSubscription.active = true;
+            currentUser.multiProfileSubscription.startedAt = new Date().toISOString();
+            const expiresAt = new Date();
+            expiresAt.setMonth(expiresAt.getMonth() + 1);
+            currentUser.multiProfileSubscription.expiresAt = expiresAt.toISOString();
+            currentUser.multiProfileSubscription.amount = MULTI_PROFILE_TOTAL;
+            
+            // Save user
+            saveUserData(currentUser);
+            
+            // Show success
+            addMessage(`<p><strong>✅ Multiple Profile Subscription Activated!</strong></p>
+                       <p>You can now create unlimited profiles.</p>
+                       <p><strong>Amount Paid:</strong> ₹${MULTI_PROFILE_TOTAL.toFixed(2)} (₹${MULTI_PROFILE_PRICE} + ₹${(MULTI_PROFILE_PRICE * MULTI_PROFILE_GST).toFixed(2)} GST)</p>
+                       <p><strong>Valid Until:</strong> ${expiresAt.toLocaleDateString()}</p>`, 'ai');
+            
+            updateProfileSelector();
+        }
+        
+        function generateProfileId() {
+            return 'profile_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        // Close profile selector when clicking outside
+        document.addEventListener('click', (e) => {
+            const selector = document.getElementById('profile-selector');
+            const btn = document.querySelector('.profile-header-btn');
+            if (selector && !selector.contains(e.target) && !btn.contains(e.target)) {
+                selector.classList.remove('active');
+            }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (currentUser) {
+                initializeProfiles();
+            }
+        });
+
+        // ============================================
+        // ADMIN AUTHORIZATION & PERMISSION MATRIX
+        // ============================================
+        
+        const OWNER_EMAIL = 'neerajmun26@gmail.com';
+        
+        // Permission definitions
+        const PERMISSIONS = {
+            'manage_users': {
+                name: 'Manage Users',
+                description: 'Add, edit, remove users'
+            },
+            'manage_admins': {
+                name: 'Manage Admins',
+                description: 'Add or remove admin emails'
+            },
+            'view_analytics': {
+                name: 'View Analytics',
+                description: 'Access revenue and user statistics'
+            },
+            'manage_payments': {
+                name: 'Manage Payments',
+                description: 'Configure payment settings and view transactions'
+            },
+            'generate_offers': {
+                name: 'Generate Offers',
+                description: 'Create offer codes and discounts'
+            },
+            'manage_prompts': {
+                name: 'Manage Prompts',
+                description: 'Update AI prompts and weekly updates'
+            },
+            'export_data': {
+                name: 'Export Data',
+                description: 'Export user data and reports'
+            },
+            'manage_profiles': {
+                name: 'Manage Profiles',
+                description: 'View and manage user profiles'
+            },
+            'free_access': {
+                name: 'Free Access',
+                description: 'Unlimited free profiles and questions'
+            },
+            'system_settings': {
+                name: 'System Settings',
+                description: 'Modify system-wide settings'
+            }
+        };
+        
+        let adminPermissions = JSON.parse(localStorage.getItem('admin_permissions') || '{}');
+        
+        // Initialize with owner having all permissions
+        if (!adminPermissions[OWNER_EMAIL]) {
+            adminPermissions[OWNER_EMAIL] = {
+                email: OWNER_EMAIL,
+                role: 'owner',
+                permissions: Object.keys(PERMISSIONS), // All permissions
+                addedBy: 'system',
+                addedAt: new Date().toISOString(),
+                isPermanent: true
+            };
+            localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+        }
+        
+        function addAdminEmail() {
+            const email = document.getElementById('authorize-email').value.trim();
+            
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+            
+            if (email === OWNER_EMAIL) {
+                alert('Owner email is already authorized with full access');
+                return;
+            }
+            
+            if (adminPermissions[email]) {
+                alert('This email is already an admin');
+                return;
+            }
+            
+            // Add new admin with no permissions initially
+            adminPermissions[email] = {
+                email: email,
+                role: 'admin',
+                permissions: [], // Start with no permissions
+                addedBy: OWNER_EMAIL,
+                addedAt: new Date().toISOString(),
+                isPermanent: false
+            };
+            
+            localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+            document.getElementById('authorize-email').value = '';
+            
+            renderAdminList();
+            alert('✅ Admin email added! Configure permissions below.');
+        }
+        
+        function removeAdmin(email) {
+            if (email === OWNER_EMAIL) {
+                alert('❌ Owner cannot be removed');
+                return;
+            }
+            
+            if (confirm(`Remove admin access for ${email}?`)) {
+                delete adminPermissions[email];
+                localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+                renderAdminList();
+                alert('✅ Admin removed successfully');
+            }
+        }
+        
+        function togglePermission(adminEmail, permission) {
+            if (adminEmail === OWNER_EMAIL) {
+                alert('❌ Owner permissions cannot be modified');
+                return;
+            }
+            
+            const admin = adminPermissions[adminEmail];
+            if (!admin) return;
+            
+            const index = admin.permissions.indexOf(permission);
+            if (index > -1) {
+                admin.permissions.splice(index, 1);
+            } else {
+                admin.permissions.push(permission);
+            }
+            
+            admin.updatedAt = new Date().toISOString();
+            localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+            
+            renderAdminList();
+        }
+        
+        function selectAllPermissions(adminEmail) {
+            if (adminEmail === OWNER_EMAIL) {
+                alert('❌ Owner already has all permissions');
+                return;
+            }
+            
+            const admin = adminPermissions[adminEmail];
+            if (!admin) return;
+            
+            admin.permissions = Object.keys(PERMISSIONS);
+            admin.updatedAt = new Date().toISOString();
+            localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+            
+            renderAdminList();
+        }
+        
+        function clearAllPermissions(adminEmail) {
+            if (adminEmail === OWNER_EMAIL) {
+                alert('❌ Owner permissions cannot be cleared');
+                return;
+            }
+            
+            if (confirm(`Remove all permissions from ${adminEmail}?`)) {
+                const admin = adminPermissions[adminEmail];
+                if (!admin) return;
+                
+                admin.permissions = [];
+                admin.updatedAt = new Date().toISOString();
+                localStorage.setItem('admin_permissions', JSON.stringify(adminPermissions));
+                
+                renderAdminList();
+            }
+        }
+        
+        function renderAdminList() {
+            const container = document.getElementById('admin-list-container');
+            container.innerHTML = '';
+            
+            // Sort: Owner first, then admins
+            const sortedAdmins = Object.values(adminPermissions).sort((a, b) => {
+                if (a.role === 'owner') return -1;
+                if (b.role === 'owner') return 1;
+                return new Date(b.addedAt) - new Date(a.addedAt);
+            });
+            
+            sortedAdmins.forEach(admin => {
+                const isOwner = admin.role === 'owner';
+                const adminCard = document.createElement('div');
+                adminCard.className = 'stat-card';
+                adminCard.style.marginBottom = '1.5rem';
+                
+                // Admin header
+                adminCard.innerHTML = `
+                    <div class="admin-email-row">
+                        <div class="admin-email-info">
+                            <span class="admin-badge ${isOwner ? 'badge-owner' : 'badge-admin'}">
+                                ${isOwner ? '👑 Owner' : '🛡️ Admin'}
+                            </span>
+                            <div>
+                                <div style="font-weight: 600; color: #e2e8f0;">${admin.email}</div>
+                                <div style="font-size: 0.85rem; color: #94a3b8;">
+                                    Added: ${new Date(admin.addedAt).toLocaleDateString()}
+                                    ${admin.addedBy !== 'system' ? ` by ${admin.addedBy}` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            ${!isOwner ? `
+                                <button class="action-btn btn-primary" onclick="selectAllPermissions('${admin.email}')" style="font-size: 0.75rem; padding: 0.4rem 0.8rem;">Select All</button>
+                                <button class="action-btn btn-danger" onclick="clearAllPermissions('${admin.email}')" style="font-size: 0.75rem; padding: 0.4rem 0.8rem;">Clear All</button>
+                                <button class="action-btn btn-danger" onclick="removeAdmin('${admin.email}')" style="font-size: 0.75rem; padding: 0.4rem 0.8rem;">Remove</button>
+                            ` : '<span style="color: #d4af37; font-size: 0.85rem;">Permanent Owner</span>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Permission Summary -->
+                    <div class="permission-summary">
+                        <h4>Current Permissions (${admin.permissions.length}/${Object.keys(PERMISSIONS).length})</h4>
+                        <div class="permission-list">
+                            ${admin.permissions.length > 0 
+                                ? admin.permissions.map(p => `<span class="permission-tag">${PERMISSIONS[p].name}</span>`).join('')
+                                : '<span style="color: #94a3b8;">No permissions assigned</span>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Permission Matrix -->
+                    <div class="permission-matrix">
+                        <h4 style="color: #d4af37; margin-bottom: 1rem;">Permission Matrix</h4>
+                        <div class="permission-grid">
+                            <div class="permission-header">Permission</div>
+                            <div class="permission-header">Granted</div>
+                            
+                            ${Object.entries(PERMISSIONS).map(([key, perm]) => `
+                                <div class="permission-row-header">
+                                    <div>
+                                        <div style="font-weight: 600;">${perm.name}</div>
+                                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.25rem;">${perm.description}</div>
+                                    </div>
+                                </div>
+                                <div class="permission-checkbox-cell">
+                                    <input 
+                                        type="checkbox" 
+                                        class="permission-checkbox"
+                                        ${admin.permissions.includes(key) ? 'checked' : ''}
+                                        ${isOwner ? 'checked disabled' : ''}
+                                        onchange="togglePermission('${admin.email}', '${key}')"
+                                    >
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(adminCard);
+            });
+        }
+        
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAdminList();
+        });
+
+        // ============================================
+        // PERMISSION CHECK SYSTEM
+        // ============================================
+        
+        const OWNER_EMAIL = 'neerajmun26@gmail.com';
+        
+        function hasPermission(email, permission) {
+            // Owner has all permissions
+            if (email === OWNER_EMAIL) {
+                return true;
+            }
+            
+            // Check admin permissions
+            const adminPermissions = JSON.parse(localStorage.getItem('admin_permissions') || '{}');
+            const admin = adminPermissions[email];
+            
+            if (!admin) {
+                return false;
+            }
+            
+            return admin.permissions.includes(permission);
+        }
+        
+        function hasAdminAccess(email) {
+            if (email === OWNER_EMAIL) {
+                return true;
+            }
+            
+            const adminPermissions = JSON.parse(localStorage.getItem('admin_permissions') || '{}');
+            return adminPermissions[email] !== undefined;
+        }
+        
+        function canPerformAction(email, action) {
+            const permissionMap = {
+                'generate_offer': 'generate_offers',
+                'manage_users': 'manage_users',
+                'manage_admins': 'manage_admins',
+                'view_analytics': 'view_analytics',
+                'export_data': 'export_data',
+                'manage_payments': 'manage_payments',
+                'manage_prompts': 'manage_prompts',
+                'free_access': 'free_access'
+            };
+            
+            const requiredPermission = permissionMap[action];
+            if (!requiredPermission) {
+                return false;
+            }
+            
+            return hasPermission(email, requiredPermission);
+        }
+        
+        // Update canCreateFreeProfile to check permissions
+        function canCreateFreeProfile() {
+            if (!currentUser) return false;
+            
+            // Check if user has free_access permission
+            if (hasPermission(currentUser.email, 'free_access')) {
+                return true;
+            }
+            
+            const freeProfilesUsed = userProfiles.filter(p => p.isFree).length;
+            const hasMultiProfileSubscription = currentUser.multiProfileSubscription && 
+                                               new Date(currentUser.multiProfileSubscription.expiresAt) > new Date();
+            
+            return freeProfilesUsed < FREE_PROFILES_LIMIT || hasMultiProfileSubscription;
+        }
+    </script>
+</body>
+</html>
+
